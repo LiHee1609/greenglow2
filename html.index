@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREENGLOW - Mỹ Phẩm Thuần Chay</title>
+    <!-- Tailwind CSS CDN để làm giao diện nhanh và đẹp -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 1. SCRIPT NETLIFY IDENTITY (Đăng nhập / Đăng ký) -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- 2. STYLESHEET & SCRIPT CỦA SNIPCART (Giỏ hàng & Thanh toán) -->
+    <link rel="preconnect" href="https://app.snipcart.com">
+    <link rel="preconnect" href="https://cdn.snipcart.com">
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.css" />
+</head>
+<body class="bg-[#faf8f5] text-gray-800 font-sans">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Logo / Brand -->
+            <a href="#" class="text-2xl font-bold text-emerald-700 tracking-wide">GREENGLOW</a>
+
+            <!-- Menu điều hướng & Tiện ích -->
+            <div class="flex items-center space-x-6">
+                <!-- Nút Đăng nhập/Đăng xuất của Netlify Identity -->
+                <div data-netlify-identity-button class="text-sm font-medium text-gray-600 hover:text-emerald-700 cursor-pointer"></div>
+
+                <!-- Nút Giỏ hàng hiển thị số lượng và tổng tiền -->
+                <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Giỏ hàng</span>
+                    <span class="snipcart-items-count bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                    <span class="snipcart-total-price font-bold text-sm hidden sm:inline-block">0 ₫</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="max-w-6xl mx-auto px-4 py-12 text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+            Mỹ Phẩm Thuần Chay <span class="text-emerald-600">GreenGlow</span>
+        </h1>
+        <p class="mt-4 max-w-2xl mx-auto text-base text-gray-500">
+            Trải nghiệm giải pháp chăm sóc da an toàn, lành tính từ thiên nhiên. 100% Thuần chay và không thử nghiệm trên động vật.
+        </p>
+    </section>
+
+    <!-- PRODUCT GRID (DANH SÁCH SẢN PHẨM) -->
+    <main class="max-w-6xl mx-auto px-4 pb-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Sản phẩm 1: Serum -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="aspect-square bg-emerald-50 rounded-xl mb-4 flex items-center justify-center text-emerald-700 font-bold text-lg">
+                        [Hình ảnh Serum]
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-900">Tinh Chất Thuần Chay GreenGlow Vegan Serum</h2>
+                    <p class="mt-2 text-sm text-gray-500 line-clamp-2">Tái tạo & cấp ẩm chuyên sâu mang lại làn da căng mọng căng tràn sức sống.</p>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-50 flex justify-between items-center mt-auto">
+                    <span class="text-lg font-black text-emerald-700">500.000 ₫</span>
+                    <!-- Nút Thêm vào giỏ Snipcart -->
+                    <button class="snipcart-add-item bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+                        data-item-id="greenglow-serum"
+                        data-item-name="Tinh Chất Thuần Chay GreenGlow Vegan Serum"
+                        data-item-price="500000"
+                        data-item-url="/"
+                        data-item-description="Tái tạo & cấp ẩm chuyên sâu mang lại làn da căng mọng."
+                        data-item-custom1-name="Quà tặng kèm"
+                        data-item-custom1-options="Mẫu thử Toner|Bông tẩy trang">
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 2: Kem chống nắng -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="aspect-square bg-emerald-50 rounded-xl mb-4 flex items-center justify-center text-emerald-700 font-bold text-lg">
+                        [Hình ảnh Kem Chống Nắng]
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-900">Kem Chống Nắng Thuần Chay GreenGlow Vegan Sunscreen</h2>
+                    <p class="mt-2 text-sm text-gray-500 line-clamp-2">Bảo vệ da tối ưu với chỉ số SPF 50+ PA+++ nâng tông nhẹ nhàng tự nhiên.</p>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-50 flex justify-between items-center mt-auto">
+                    <span class="text-lg font-black text-emerald-700">400.000 ₫</span>
+                    <button class="snipcart-add-item bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+                        data-item-id="greenglow-sunscreen"
+                        data-item-name="Kem Chống Nắng Thuần Chay GreenGlow Vegan Sunscreen"
+                        data-item-price="400000"
+                        data-item-url="/"
+                        data-item-description="Bảo vệ da tối ưu với chỉ số SPF 50+ PA+++.">
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 3: Nước hoa hồng -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="aspect-square bg-emerald-50 rounded-xl mb-4 flex items-center justify-center text-emerald-700 font-bold text-lg">
+                        [Hình ảnh Toner]
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-900">Nước Hoa Hồng Thuần Chay GreenGlow Vegan Toner</h2>
+                    <p class="mt-2 text-sm text-gray-500 line-clamp-2">Cân bằng & làm dịu chiết xuất trà xanh kháng viêm kiềm dầu hiệu quả.</p>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-50 flex justify-between items-center mt-auto">
+                    <span class="text-lg font-black text-emerald-700">350.000 ₫</span>
+                    <button class="snipcart-add-item bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+                        data-item-id="greenglow-toner"
+                        data-item-name="Nước Hoa Hồng Thuần Chay GreenGlow Vegan Toner"
+                        data-item-price="350000"
+                        data-item-url="/"
+                        data-item-description="Cân bằng & làm dịu chiết xuất trà xanh.">
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 4: Mặt nạ -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="aspect-square bg-emerald-50 rounded-xl mb-4 flex items-center justify-center text-emerald-700 font-bold text-lg">
+                        [Hình ảnh Mặt Nạ]
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-900">Mặt Nạ Thuần Chay GreenGlow Vegan Sheet Mask</h2>
+                    <p class="mt-2 text-sm text-gray-500 line-clamp-2">Làm dịu & cấp ẩm chuyên sâu tức thì cho làn da sau ngày dài mệt mỏi.</p>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-50 flex justify-between items-center mt-auto">
+                    <span class="text-lg font-black text-emerald-700">300.000 ₫</span>
+                    <button class="snipcart-add-item bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+                        data-item-id="greenglow-mask"
+                        data-item-name="Mặt Nạ Thuần Chay GreenGlow Vegan Sheet Mask"
+                        data-item-price="300000"
+                        data-item-url="/"
+                        data-item-description="Làm dịu & cấp ẩm chuyên sâu tức thì.">
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 5: Son dưỡng -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="aspect-square bg-emerald-50 rounded-xl mb-4 flex items-center justify-center text-emerald-700 font-bold text-lg">
+                        [Hình ảnh Son Dưỡng]
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-900">Son Dưỡng Thiên Nhiên GreenGlow</h2>
+                    <p class="mt-2 text-sm text-gray-500 line-clamp-2">Đôi môi mềm mại, hồng hào với bảng thành phần an toàn tuyệt đối từ thiên nhiên.</p>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-50 flex justify-between items-center mt-auto">
+                    <span class="text-lg font-black text-emerald-700">145.000 ₫</span>
+                    <button class="snipcart-add-item bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+                        data-item-id="greenglow-lipbalm"
+                        data-item-name="Son Dưỡng Thiên Nhiên GreenGlow"
+                        data-item-price="145000"
+                        data-item-url="/"
+                        data-item-description="Đôi môi mềm mại, hồng hào, an toàn tuyệt đối.">
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 text-center text-sm text-gray-400">
+        <p>© 2026 GREENGLOW. All rights reserved.</p>
+    </footer>
+
+    <!-- 3. SCRIPT KÍCH HOẠT SNIPCART -->
+    <!-- LƯU Ý: Thay đổi giá trị data-api-key bằng Public API Key lấy từ Dashboard của Snipcart khi bạn deploy thực tế -->
+    <script async src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
+    <div hidden id="snipcart" data-api-key="ODNmMjYyNzYtZDFmMi00NTg0LTg0MTItMTI3Zjg0NmI3MDdmNjM4NTQ3NjIxNTU1NDk0NDI4" data-currency="vnd"></div>
+
+    <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.reload();
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
