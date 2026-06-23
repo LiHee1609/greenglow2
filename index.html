@@ -178,8 +178,13 @@
 
     <!-- 3. SCRIPT KÍCH HOẠT SNIPCART -->
     <!-- LƯU Ý: Thay đổi giá trị data-api-key bằng Public API Key lấy từ Dashboard của Snipcart khi bạn deploy thực tế -->
-    <script async src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
-    <div hidden id="snipcart" data-api-key="YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5" data-currency="vnd"></div>
+    <script>
+        window.SnipcartSettings = {
+            publicApiKey: 'YWE1Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjh闭MzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5',
+            loadStrategy: 'on-user-interaction',
+        };
+        (()=>{"use strict";var e,t,n,i,o,r;const a=window.SnipcartSettings,s=window.SnipcartSettings.version||"3.0";var c,d;(d=(c=window.SnipcartSettings).timeoutDuration)!=null||(c.timeoutDuration=2750);var u,p;(p=(u=window.SnipcartSettings).domain)!=null||(u.domain="cdn.snipcart.com");var m,f;(f=(m=window.SnipcartSettings).protocol)!=null||(m.protocol="https");var g,v;(v=(g=window.SnipcartSettings).loadCSS)!=null||(g.loadCSS=!0);const l=window.document.querySelectorAll("link[href*='snipcart.css']"),h=window.document.querySelectorAll("script[src*='snipcart.js']"),w=window.document.getElementById("snipcart");function b(){const e=window.document.getElementById("snipcart");e&&e.setAttribute("data-currency","vnd")}i=l,o=h,r=w,i.length>0||o.length>0||r?b():(e=window.document.createElement("link"),t=window.document.createElement("script"),e.rel="stylesheet",e.type="text/css",e.href=`${a.protocol}://${a.domain}/themes/v3.4.1/default/snipcart.css`,t.src=`${a.protocol}://${a.domain}/themes/v3.4.1/default/snipcart.js`,t.async=!0,window.document.head.appendChild(e),window.document.head.appendChild(t),t.addEventListener("load",b))})();
+    </script>
 
     <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
     <script>
