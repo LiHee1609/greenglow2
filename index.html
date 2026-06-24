@@ -76,14 +76,62 @@
 </header>
 
     <!-- HERO SECTION -->
-    <section class="max-w-6xl mx-auto px-4 py-12 text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-            Mỹ Phẩm Thuần Chay <span class="text-emerald-600">GreenGlow</span>
-        </h1>
-        <p class="mt-4 max-w-2xl mx-auto text-base text-gray-500">
-            Trải nghiệm giải pháp chăm sóc da an toàn, lành tính từ thiên nhiên. 100% Thuần chay và không thử nghiệm trên động vật.
-        </p>
-    </section>
+    <!-- ================= PHẦN BANNER ĐẦU TRANG (HERO SECTION) CÓ ẢNH NỀN ================= -->
+<section class="relative min-h-[85vh] flex items-center justify-center bg-emerald-900 overflow-hidden">
+    
+    <!-- 
+        ẢNH NỀN CHÍNH: Trỏ trực tiếp đến file "background.jpg" bạn vừa upload lên GitHub.
+        Nếu ảnh bị lỗi hoặc chưa load kịp, hệ thống sẽ tự động dùng ảnh thiên nhiên tuyệt đẹp từ Unsplash làm dự phòng.
+    -->
+    <div class="absolute inset-0 z-0">
+        <img src="./background.jpg" 
+             alt="GreenGlow Background" 
+             class="w-full h-full object-cover object-center opacity-85 transition-opacity duration-500"
+             onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1920&auto=format&fit=crop'">
+             
+        <!-- Lớp phủ Gradient mượt mà giúp làm dịu ảnh nền và giúp văn bản hiển thị cực kỳ rõ nét, dễ đọc -->
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/80 via-emerald-900/65 to-transparent"></div>
+    </div>
+
+    <!-- NỘI DUNG CHÍNH TRÊN BANNER (Được căn giữa trên mobile, lệch trái trên màn hình lớn) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-32">
+        <div class="max-w-2xl text-white space-y-6">
+            
+            <!-- Nhãn nhỏ xinh phía trên tiêu đề -->
+            <div class="inline-flex items-center space-x-2 bg-emerald-500/25 border border-emerald-400/30 px-3.5 py-1.5 rounded-full backdrop-blur-sm">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs font-bold tracking-wider uppercase">100% Thuần chay & Lành tính</span>
+            </div>
+
+            <!-- Tiêu đề lớn đầy ấn tượng -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                Đánh thức vẻ đẹp <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
+                    Thuần Khiết Tự Nhiên
+                </span>
+            </h1>
+
+            <!-- Dòng giới thiệu ngắn gọn, truyền cảm hứng -->
+            <p class="text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-lg">
+                GreenGlow mang đến giải pháp chăm sóc da hữu cơ an toàn tuyệt đối. Nuôi dưỡng làn da căng mọng, rạng rỡ từ những tinh túy chắt lọc của cây cỏ đất trời.
+            </p>
+
+            <!-- Các nút bấm tương tác (Call to Action) -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                <a href="#san-pham" class="inline-flex items-center justify-center bg-white hover:bg-emerald-50 text-emerald-900 font-bold px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-center">
+                    Mua Sắm Ngay
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+                <a href="#cau-chuyen" class="inline-flex items-center justify-center bg-emerald-800/45 hover:bg-emerald-800/60 border border-white/20 text-white font-bold px-8 py-4 rounded-2xl backdrop-blur-md transition-all duration-300 text-center">
+                    Tìm hiểu thêm
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <!-- PRODUCT GRID (DANH SÁCH SẢN PHẨM) -->
     <main class="max-w-6xl mx-auto px-4 pb-24">
