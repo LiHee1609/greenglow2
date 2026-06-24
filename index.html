@@ -18,62 +18,76 @@
 <body class="bg-[#faf8f5] text-gray-800 font-sans">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            
-            <!-- KHU VỰC LOGO & TÊN THƯƠNG HIỆU -->
-            <a href="#" class="flex items-center space-x-3 group">
-                <div class="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
-                    <!-- 
-                        ĐÃ CẤU HÌNH: Trỏ trực tiếp đến file "logo.png" bạn vừa upload lên GitHub.
-                        Nếu ảnh bị lỗi hoặc chưa load xong, hệ thống sẽ tự động hiển thị icon Lá cây (SVG) thay thế để web không bị trống.
-                    -->
-                    <img src="./logo2.png" 
-                         alt="GreenGlow Logo" 
-                         class="h-full w-full object-contain p-1"
-                         onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
-                         
-                    <!-- Logo dự phòng bằng SVG hình chiếc lá xinh xắn -->
-                    <div id="fallback-logo" class="hidden h-full w-full items-center justify-center bg-emerald-100 text-emerald-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                </div>
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
                 
-                <!-- Tên thương hiệu hiển thị bên cạnh Logo -->
-                <div class="flex flex-col">
-                    <span class="text-xl font-black tracking-wider text-gray-900 group-hover:text-emerald-600 transition-colors">
-                        GREEN<span class="text-emerald-600">GLOW</span>
-                    </span>
-                    <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.2em] -mt-1">Organic Cosmetics</span>
+                <!-- Logo & Tên thương hiệu GreenGlow -->
+                <a href="./index.html" class="flex items-center space-x-3 group">
+                    <div class="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <img src="./logo.png" 
+                             alt="GreenGlow Logo" 
+                             class="h-full w-full object-contain p-1"
+                             onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
+                             
+                        <div id="fallback-logo" class="hidden h-full w-full items-center justify-center bg-emerald-100 text-emerald-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-wider text-gray-900 group-hover:text-emerald-600 transition-colors">
+                            GREEN<span class="text-emerald-600">GLOW</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.2em] -mt-1">Organic Cosmetics</span>
+                    </div>
+                </a>
+
+                <!-- Menu điều hướng chính trên máy tính (Ẩn trên điện thoại) -->
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
+                    <a href="./index.html" class="text-emerald-600 border-b-2 border-emerald-500 pb-1">Trang chủ</a>
+                    <a href="./index.html#san-pham" class="hover:text-emerald-600 transition-colors">Cửa hàng</a>
+                    <a href="./about.html" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                    <a href="./index.html#lien-he" class="hover:text-emerald-600 transition-colors">Liên hệ</a>
+                </nav>
+
+                <!-- Giỏ hàng & Nút bấm mở Menu cho Mobile -->
+                <div class="flex items-center space-x-3">
+                    <!-- Nút Giỏ hàng Snipcart -->
+                    <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3.5 py-2 rounded-xl transition-all duration-300 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="text-sm hidden sm:inline">Giỏ hàng</span>
+                        <span class="snipcart-items-count absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border border-white">0</span>
+                    </button>
+
+                    <!-- Nút Hamburger Menu (Chỉ hiện trên di động) -->
+                    <button id="mobile-menu-button" class="md:hidden flex items-center justify-center p-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors" aria-label="Menu">
+                        <!-- Biểu tượng 3 gạch -->
+                        <svg id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Biểu tượng dấu X đóng (ẩn mặc định) -->
+                        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-            </a>
 
-            <!-- MENU ĐIỀU HƯỚNG CHÍNH -->
-            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
-                <a href="#" class="hover:text-emerald-600 transition-colors">Trang chủ</a>
-                <a href="#san-pham" class="hover:text-emerald-600 transition-colors text-emerald-600 border-b-2 border-emerald-500 pb-1">Cửa hàng</a>
-                <a href="./about.html" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
-                <a href="#lien-he" class="hover:text-emerald-600 transition-colors">Liên hệ</a>
-            </nav>
-
-            <!-- NÚT GIỎ HÀNG SNIPCART -->
-            <div class="flex items-center space-x-4">
-                <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-4 py-2.5 rounded-xl transition-all duration-300 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                    <span class="text-sm">Giỏ hàng</span>
-                    <!-- Hiển thị số lượng sản phẩm trong giỏ -->
-                    <span class="snipcart-items-count absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border border-white">0</span>
-                </button>
             </div>
-
         </div>
-    </div>
-</header>
+
+        <!-- Bảng Menu đổ xuống khi bấm trên điện thoại (Ẩn mặc định) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2 shadow-inner">
+            <a href="./index.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold bg-emerald-500 text-white transition-all">Trang chủ</a>
+            <a href="./index.html#san-pham" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Cửa hàng</a>
+            <a href="./about.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Về chúng tôi</a>
+            <a href="./index.html#lien-he" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Liên hệ</a>
+        </div>
+    </header>
 
     <!-- HERO SECTION -->
     <!-- ================= PHẦN BANNER ĐẦU TRANG (HERO SECTION) CÓ ẢNH NỀN ================= -->
@@ -342,6 +356,40 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        // Lấy các phần tử HTML cần thao tác đóng mở
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        // Bắt sự kiện click vào nút bấm 3 gạch ngang
+        mobileMenuButton.addEventListener('click', () => {
+            // Đóng hoặc mở Class hidden để ẩn/hiện bảng chọn của menu
+            const isClosed = mobileMenu.classList.toggle('hidden');
+            
+            if (isClosed) {
+                // Nếu đóng: Hiện biểu tượng 3 gạch, ẩn dấu X
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                // Nếu mở: Ẩn biểu tượng 3 gạch, hiện dấu X
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        });
+
+        // Tự động đóng Menu khi người dùng nhấn vào bất kỳ một liên kết nào trên menu di động
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
     </script>
 </body>
 </html>
