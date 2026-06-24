@@ -18,28 +18,62 @@
 <body class="bg-[#faf8f5] text-gray-800 font-sans">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <!-- Logo / Brand -->
-            <a href="#" class="text-2xl font-bold text-emerald-700 tracking-wide">GREENGLOW</a>
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            
+            <!-- KHU VỰC LOGO & TÊN THƯƠNG HIỆU -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <!-- 
+                        ĐÃ CẤU HÌNH: Trỏ trực tiếp đến file "logo.png" bạn vừa upload lên GitHub.
+                        Nếu ảnh bị lỗi hoặc chưa load xong, hệ thống sẽ tự động hiển thị icon Lá cây (SVG) thay thế để web không bị trống.
+                    -->
+                    <img src="./logo.png" 
+                         alt="GreenGlow Logo" 
+                         class="h-full w-full object-contain p-1"
+                         onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
+                         
+                    <!-- Logo dự phòng bằng SVG hình chiếc lá xinh xắn -->
+                    <div id="fallback-logo" class="hidden h-full w-full items-center justify-center bg-emerald-100 text-emerald-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Tên thương hiệu hiển thị bên cạnh Logo -->
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-wider text-gray-900 group-hover:text-emerald-600 transition-colors">
+                        GREEN<span class="text-emerald-600">GLOW</span>
+                    </span>
+                    <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.2em] -mt-1">Organic Cosmetics</span>
+                </div>
+            </a>
 
-            <!-- Menu điều hướng & Tiện ích -->
-            <div class="flex items-center space-x-6">
-                <!-- Nút Đăng nhập/Đăng xuất của Netlify Identity -->
-                <div data-netlify-identity-button class="text-sm font-medium text-gray-600 hover:text-emerald-700 cursor-pointer"></div>
+            <!-- MENU ĐIỀU HƯỚNG CHÍNH -->
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
+                <a href="#" class="hover:text-emerald-600 transition-colors">Trang chủ</a>
+                <a href="#san-pham" class="hover:text-emerald-600 transition-colors text-emerald-600 border-b-2 border-emerald-500 pb-1">Cửa hàng</a>
+                <a href="#cau-chuyen" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                <a href="#lien-he" class="hover:text-emerald-600 transition-colors">Liên hệ</a>
+            </nav>
 
-                <!-- Nút Giỏ hàng hiển thị số lượng và tổng tiền -->
-                <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <!-- NÚT GIỎ HÀNG SNIPCART -->
+            <div class="flex items-center space-x-4">
+                <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-4 py-2.5 rounded-xl transition-all duration-300 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <span class="font-semibold text-sm">Giỏ hàng</span>
-                    <span class="snipcart-items-count bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
-                    <span class="snipcart-total-price font-bold text-sm hidden sm:inline-block">0 ₫</span>
+                    <span class="text-sm">Giỏ hàng</span>
+                    <!-- Hiển thị số lượng sản phẩm trong giỏ -->
+                    <span class="snipcart-items-count absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border border-white">0</span>
                 </button>
             </div>
+
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- HERO SECTION -->
     <section class="max-w-6xl mx-auto px-4 py-12 text-center">
