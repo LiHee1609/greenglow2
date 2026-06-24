@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - GreenGlow Organic Cosmetics</title>
+    <!-- Thư viện Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phông chữ Inter & Playfair Display đẳng cấp -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif-brand {
+            font-family: 'Playfair Display', serif;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+    <!-- Cấu hình Snipcart đồng bộ giỏ hàng toàn trang -->
+    <script>
+        window.SnipcartSettings = {
+            publicApiKey: 'YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5',
+            loadStrategy: 'on-user-interaction',
+            currency: 'vnd',
+            addProductBehavior: 'custom'
+        };
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Tên thương hiệu GreenGlow -->
+                <a href="./index.html" class="flex items-center space-x-3 group">
+                    <div class="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <img src="./logo.png" 
+                             alt="GreenGlow Logo" 
+                             class="h-full w-full object-contain p-1"
+                             onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
+                             
+                        <div id="fallback-logo" class="hidden h-full w-full items-center justify-center bg-emerald-100 text-emerald-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-wider text-gray-900 group-hover:text-emerald-600 transition-colors">
+                            GREEN<span class="text-emerald-600">GLOW</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.2em] -mt-1">Organic Cosmetics</span>
+                    </div>
+                </a>
+
+                <!-- Menu điều hướng chính trên máy tính (Ẩn trên điện thoại) -->
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
+                    <a href="./index.html" class="hover:text-emerald-600 transition-colors">Trang chủ</a>
+                    <a href="./index.html#san-pham" class="hover:text-emerald-600 transition-colors">Cửa hàng</a>
+                    <a href="./about.html" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                    <a href="./contact.html" class="text-emerald-600 border-b-2 border-emerald-500 pb-1">Liên hệ</a>
+                </nav>
+
+                <!-- Giỏ hàng & Nút Hamburger cho Mobile -->
+                <div class="flex items-center space-x-3">
+                    <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3.5 py-2 rounded-xl transition-all duration-300 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="text-sm hidden sm:inline">Giỏ hàng</span>
+                        <span class="snipcart-items-count absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border border-white">0</span>
+                    </button>
+
+                    <!-- Hamburger Button cho Mobile -->
+                    <button id="mobile-menu-button" class="md:hidden flex items-center justify-center p-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors" aria-label="Menu">
+                        <svg id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Dropdown Menu trên điện thoại (Ẩn mặc định) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2 shadow-inner">
+            <a href="./index.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Trang chủ</a>
+            <a href="./index.html#san-pham" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Cửa hàng</a>
+            <a href="./about.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Về chúng tôi</a>
+            <a href="./contact.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold bg-emerald-500 text-white transition-all">Liên hệ</a>
+        </div>
+    </header>
+
+    <!-- -->
+    <section class="relative bg-emerald-950 text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-30">
+            <img src="./background.jpg" alt="GreenGlow Background" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1920&auto=format&fit=crop'">
+            <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/80 to-emerald-950"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-4 animate-fade-in">
+            <span class="text-xs font-bold tracking-widest text-emerald-400 uppercase bg-emerald-900/50 px-3.5 py-1.5 rounded-full border border-emerald-500/20">LIÊN HỆ VỚI CHÚNG TÔI</span>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">Đồng Hành Cùng Bạn</h1>
+            <p class="text-emerald-100/80 max-w-2xl mx-auto text-sm sm:text-lg font-light leading-relaxed">
+                Đội ngũ tư vấn viên của chúng tôi luôn túc trực để lắng nghe và hỗ trợ mọi nhu cầu chăm sóc làn da thuần chay của bạn.
+            </p>
+        </div>
+    </section>
+
+    <!-- -->
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                
+                <!-- Cột trái: Thông tin liên lạc & Giờ làm việc (lg:col-span-5) -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-4">
+                        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Thông tin chi tiết</h2>
+                        <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
+                            Mọi thắc mắc về đơn hàng, chất lượng sản phẩm hoặc mong muốn hợp tác kinh doanh, vui lòng liên hệ với chúng tôi qua các kênh dưới đây.
+                        </p>
+                    </div>
+
+                    <!-- Danh sách thông tin liên lạc -->
+                    <div class="space-y-6">
+                        <!-- Hotline -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Hotline Tư Vấn</h3>
+                                <p class="text-base sm:text-lg font-extrabold text-emerald-700 mt-1">1900 8198</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Hỗ trợ nhanh chóng 24/7</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Email liên hệ</h3>
+                                <p class="text-base font-bold text-gray-900 mt-1">support@greenglow.vn</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Chúng tôi phản hồi trong vòng 24 giờ làm việc</p>
+                            </div>
+                        </div>
+
+                        <!-- Cửa hàng chính -->
+                        <div class="flex items-start space-x-4">
+                            <div class="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Địa chỉ cửa hàng</h3>
+                                <p class="text-base font-bold text-gray-900 mt-1 leading-relaxed">123 Đường Thảo Mộc, Quận 1, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Khung Giờ Hoạt Động -->
+                    <div class="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100/30 space-y-3">
+                        <h3 class="text-base font-bold text-emerald-950">Giờ mở cửa</h3>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>Thứ 2 — Thứ 7:</span>
+                            <span class="font-semibold text-gray-950">8:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600 border-t border-emerald-100/40 pt-2">
+                            <span>Chủ Nhật:</span>
+                            <span class="font-semibold text-gray-950">9:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Form nhập thông tin gửi tin nhắn (lg:col-span-7) -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-gray-100 shadow-xl shadow-gray-100/30">
+                    <h2 class="text-xl sm:text-2xl font-black text-gray-950 mb-6">Gửi tin nhắn cho chúng tôi</h2>
+                    
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="space-y-2">
+                                <label for="name" class="text-xs font-bold text-gray-500 uppercase tracking-wider">Họ và Tên *</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 focus:border-emerald-500 text-sm transition-all" placeholder="Nguyễn Văn A">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="phone" class="text-xs font-bold text-gray-500 uppercase tracking-wider">Số điện thoại *</label>
+                                <input type="tel" id="phone" required class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 focus:border-emerald-500 text-sm transition-all" placeholder="0987xxxxxx">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="email" class="text-xs font-bold text-gray-500 uppercase tracking-wider">Địa chỉ Email *</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 focus:border-emerald-500 text-sm transition-all" placeholder="email@gmail.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="message" class="text-xs font-bold text-gray-500 uppercase tracking-wider">Nội dung tin nhắn *</label>
+                            <textarea id="message" required rows="5" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 focus:border-emerald-500 text-sm transition-all" placeholder="Tôi cần tư vấn thêm về dòng sản phẩm son dưỡng môi hữu cơ..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm text-center">
+                            Gửi yêu cầu ngay
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- -->
+    <section class="w-full h-[400px] sm:h-[480px] bg-gray-100 relative border-t border-b border-gray-100">
+        <!-- Google Maps Iframe lấy địa chỉ minh họa trung tâm Quận 1 -->
+        <iframe class="absolute inset-0 w-full h-full grayscale hover:grayscale-0 transition-all duration-700" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3919.4852936319835!2d106.6974753!3d10.7740889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919.4852936319835%3A0x0!2zMTIzIMSQxrDhu51uZyBUaOG6o28gTeG7mWMsIFF14bqtbiAxLCBUUC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1700000000000" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+    <!-- -->
+    <section class="py-16 sm:py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-xl mx-auto mb-12 space-y-2">
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Hỗ Trợ Khách Hàng</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Câu Hỏi Thường Gặp (FAQ)</h2>
+                <p class="text-gray-500 text-sm">Giải đáp nhanh các vấn đề được quan tâm nhiều nhất</p>
+            </div>
+
+            <!-- Accordion FAQ Container -->
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center text-gray-900 hover:text-emerald-600 font-bold text-sm sm:text-base">
+                        <span>Sản phẩm của GreenGlow có thực sự thuần chay 100% không?</span>
+                        <svg class="faq-icon h-5 w-5 text-gray-400 shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed border-t border-gray-50 pt-3">
+                            Chính xác 100%. Tất cả các dòng sản phẩm của GreenGlow từ mặt nạ, son dưỡng cho đến serum đều sử dụng nguyên liệu chiết xuất hoàn toàn từ thực vật hữu cơ, đạt chuẩn Vegan toàn cầu và tuyệt đối không sử dụng mỡ cừu, sáp ong hay gelatin động vật.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center text-gray-900 hover:text-emerald-600 font-bold text-sm sm:text-base">
+                        <span>Thời gian giao nhận đơn hàng mất bao lâu?</span>
+                        <svg class="faq-icon h-5 w-5 text-gray-400 shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed border-t border-gray-50 pt-3">
+                            Đối với khu vực nội thành TP. Hồ Chí Minh, đơn hàng sẽ được giao trong ngày hoặc từ 1-2 ngày làm việc. Các tỉnh thành khác trên toàn quốc sẽ nhận được hàng sau từ 2-4 ngày làm việc tùy thuộc vào đơn vị vận chuyển.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center text-gray-900 hover:text-emerald-600 font-bold text-sm sm:text-base">
+                        <span>Mỹ phẩm thuần chay hữu cơ hạn sử dụng bao lâu?</span>
+                        <svg class="faq-icon h-5 w-5 text-gray-400 shrink-0 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="px-6 pb-5 text-sm text-gray-500 leading-relaxed border-t border-gray-50 pt-3">
+                            Do sử dụng các công nghệ bảo quản lạnh sinh học thiên nhiên thay thế hoàn toàn cho paraben hóa học, hạn sử dụng của sản phẩm thường là 24 tháng kể từ ngày sản xuất và khuyến nghị nên sử dụng tốt nhất trong vòng 6 - 8 tháng kể từ khi mở nắp.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -->
+    <footer class="bg-gray-950 text-white pt-20 pb-10 border-t border-emerald-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-gray-800">
+                
+                <div class="space-y-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                            <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-black tracking-wider text-white">
+                            GREEN<span class="text-emerald-500">GLOW</span>
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Hệ sinh thái mỹ phẩm thuần chay hữu cơ 100%. Nâng niu, bảo bọc làn da Việt bằng nguồn năng lượng chữa lành tinh khiết nhất từ thiên nhiên.
+                    </p>
+                    <!-- Nút liên kết MXH -->
+                    <div class="flex items-center space-x-4 pt-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="h-9 w-9 rounded-xl bg-gray-900 hover:bg-emerald-600 hover:text-white text-gray-400 flex items-center justify-center transition-all duration-300">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="h-9 w-9 rounded-xl bg-gray-900 hover:bg-emerald-600 hover:text-white text-gray-400 flex items-center justify-center transition-all duration-300">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-5 md:pl-8">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Liên Kết</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li>
+                            <a href="./index.html" class="hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/50"></span>
+                                <span>Trang chủ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./index.html#san-pham" class="hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/50"></span>
+                                <span>Cửa hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./about.html" class="hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/50"></span>
+                                <span>Về chúng tôi</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-5">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Liên Hệ</h3>
+                    <ul class="space-y-3.5 text-sm text-gray-400">
+                        <li class="flex items-start space-x-3">
+                            <svg class="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Email: support@greenglow.vn</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <svg class="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span>Hotline: 1900 8198</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <svg class="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="leading-relaxed">Cửa hàng: 123 Đường Thảo Mộc, Quận 1, TP. Hồ Chí Minh</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-5">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Chứng nhận xanh</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-emerald-400">VEGAN</span>
+                            <span class="text-[9px] text-gray-500 uppercase font-bold tracking-wider mt-0.5">100% Thuần chay</span>
+                        </div>
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-emerald-400">ORGANIC</span>
+                            <span class="text-[9px] text-gray-500 uppercase font-bold tracking-wider mt-0.5">Thảo mộc sạch</span>
+                        </div>
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-emerald-400">CRUELTY</span>
+                            <span class="text-[9px] text-gray-500 uppercase font-bold tracking-wider mt-0.5">Không thử động vật</span>
+                        </div>
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-emerald-400">SAFE</span>
+                            <span class="text-[9px] text-gray-500 uppercase font-bold tracking-wider mt-0.5">Không Paraben</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 space-y-4 sm:space-y-0">
+                <p>&copy; 2026 GreenGlow Organic. Bảo lưu mọi quyền.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-emerald-400 transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-emerald-400 transition-colors">Điều khoản dịch vụ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL THÔNG BÁO GỬI TIN NHẮN THÀNH CÔNG (Popup không dùng Alert) -->
+    <div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <!-- Lớp phủ tối mờ phía sau -->
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+        <!-- Thẻ nội dung thông báo -->
+        <div class="relative bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border border-gray-100 animate-fade-in space-y-4">
+            <div class="h-14 w-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Gửi tin nhắn thành công!</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">Cảm ơn bạn đã gửi liên hệ. Đội ngũ GreenGlow sẽ phản hồi lại bạn qua Email/Số điện thoại sớm nhất có thể.</p>
+            <button id="close-modal" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-colors text-sm">
+                Đóng thông báo
+            </button>
+        </div>
+    </div>
+
+    <!-- -->
+    <script>
+        // 1. Logic đóng/mở Mobile Menu 3 gạch
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isClosed = mobileMenu.classList.toggle('hidden');
+            if (isClosed) {
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        });
+
+        // 2. Logic xử lý Accordion FAQ (Đóng mở câu hỏi)
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.faq-icon');
+                
+                // Thu gọn các FAQ khác
+                document.querySelectorAll('.faq-content').forEach(otherContent => {
+                    if (otherContent !== content) {
+                        otherContent.style.maxHeight = null;
+                        otherContent.previousElementSibling.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Đóng/Mở FAQ hiện tại
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 3. Logic xử lý Form gửi tin nhắn & Popup Modal
+        const contactForm = document.getElementById('contact-form');
+        const successModal = document.getElementById('success-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Ngăn load lại trang web
+            successModal.classList.remove('hidden'); // Hiển thị popup thành công
+            contactForm.reset(); // Làm sạch form
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            successModal.classList.add('hidden'); // Đóng popup
+        });
+    </script>
+
+    <!-- Khởi chạy giỏ hàng Snipcart -->
+    <script async src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
+    <div hidden id="snipcart" data-api-key="YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5"></div>
+</body>
+</html>
