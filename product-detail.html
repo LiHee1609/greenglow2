@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm - GreenGlow Organic Cosmetics</title>
+    <!-- Tailwind CSS và Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif-brand { font-family: 'Playfair Display', serif; }
+    </style>
+    <!-- Cấu hình Snipcart -->
+    <script>
+        window.SnipcartSettings = {
+            publicApiKey: 'YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5',
+            loadStrategy: 'on-user-interaction',
+            currency: 'vnd',
+            addProductBehavior: 'custom'
+        };
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- ========================================== -->
+    <!-- THANH MENU ĐỒNG BỘ -->
+    <!-- ========================================== -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Tên thương hiệu GreenGlow -->
+                <a href="./index.html" class="flex items-center space-x-3 group">
+                    <div class="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <img src="./logo.png" 
+                             alt="GreenGlow Logo" 
+                             class="h-full w-full object-contain p-1"
+                             onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
+                             
+                        <div id="fallback-logo" class="hidden h-full w-full items-center justify-center bg-emerald-100 text-emerald-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-wider text-gray-900 group-hover:text-emerald-600 transition-colors">
+                            GREEN<span class="text-emerald-600">GLOW</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.2em] -mt-1">Organic Cosmetics</span>
+                    </div>
+                </a>
+
+                <!-- Menu điều hướng chính trên máy tính -->
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
+                    <a href="./index.html" class="hover:text-emerald-600 transition-colors">Trang chủ</a>
+                    <a href="./index.html#san-pham" class="hover:text-emerald-600 transition-colors text-emerald-600 border-b-2 border-emerald-500 pb-1">Cửa hàng</a>
+                    <a href="./about.html" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                    <a href="./contact.html" class="hover:text-emerald-600 transition-colors">Liên hệ</a>
+                </nav>
+
+                <!-- Giỏ hàng & Nút Hamburger cho Mobile -->
+                <div class="flex items-center space-x-3">
+                    <button class="snipcart-checkout flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3.5 py-2 rounded-xl transition-all duration-300 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="text-sm hidden sm:inline">Giỏ hàng</span>
+                        <span class="snipcart-items-count absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border border-white">0</span>
+                    </button>
+
+                    <button id="mobile-menu-button" class="md:hidden flex items-center justify-center p-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors" aria-label="Menu">
+                        <svg id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bảng Menu đổ xuống trên điện thoại -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2 shadow-inner">
+            <a href="./index.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Trang chủ</a>
+            <a href="./index.html#san-pham" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Cửa hàng</a>
+            <a href="./about.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Về chúng tôi</a>
+            <a href="./contact.html" class="block px-4 py-2.5 rounded-xl text-base font-semibold text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition-all">Liên hệ</a>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CHI TIẾT SẢN PHẨM (DỰA VÀO JAVASCRIPT ĐỂ ĐỔ NỘI DUNG) -->
+    <!-- ========================================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+        
+        <!-- Nút quay lại trang chủ -->
+        <div class="mb-8">
+            <a href="./index.html#san-pham" class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-700 space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Quay lại cửa hàng</span>
+            </a>
+        </div>
+
+        <!-- Khung hiển thị khi không tìm thấy sản phẩm -->
+        <div id="product-not-found" class="hidden text-center py-20 space-y-4">
+            <h2 class="text-2xl font-bold text-gray-950">Không tìm thấy sản phẩm này</h2>
+            <p class="text-gray-500">Sản phẩm bạn đang tìm kiếm có thể đã hết hàng hoặc đường dẫn không đúng.</p>
+            <a href="./index.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all">Quay lại Trang Chủ</a>
+        </div>
+
+        <!-- Grid chính của trang chi tiết -->
+        <div id="product-container" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Cột trái: Ảnh sản phẩm sắc nét -->
+            <div class="lg:col-span-6 relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-3xl blur opacity-25"></div>
+                <div class="relative bg-white p-3 rounded-3xl border border-gray-100 shadow-sm overflow-hidden aspect-square flex items-center justify-center">
+                    <img id="detail-image" src="" alt="Product Image" class="w-full h-full object-cover rounded-2xl">
+                </div>
+            </div>
+
+            <!-- Cột phải: Thông tin chi tiết & Mua hàng -->
+            <div class="lg:col-span-6 space-y-6 sm:space-y-8">
+                <div class="space-y-2">
+                    <span id="detail-category" class="text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full">Organic Cosmetics</span>
+                    <h1 id="detail-name" class="text-2xl sm:text-4xl font-black text-gray-950 leading-tight">Loading...</h1>
+                </div>
+
+                <!-- Giá bán -->
+                <div class="flex items-baseline space-x-3 border-b border-gray-100 pb-6">
+                    <span id="detail-price-text" class="text-3xl font-black text-emerald-700">0 ₫</span>
+                    <span class="text-xs text-gray-400 italic">Đã bao gồm VAT</span>
+                </div>
+
+                <!-- Nút đặt mua tích hợp Snipcart -->
+                <div class="pt-2">
+                    <button id="add-to-cart-btn" class="snipcart-add-item w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center space-x-3"
+                        data-item-id=""
+                        data-item-name=""
+                        data-item-price=""
+                        data-item-url="data:application/json,blank"
+                        data-item-image=""
+                        data-item-description="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span>Thêm vào giỏ hàng</span>
+                    </button>
+                </div>
+
+                <!-- Tab thông tin: Mô tả, thành phần, cách dùng -->
+                <div class="space-y-6 pt-6 border-t border-gray-100">
+                    <!-- Mô tả ngắn -->
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-bold text-gray-950 uppercase tracking-wider">Thông tin sản phẩm</h3>
+                        <p id="detail-desc" class="text-sm sm:text-base text-gray-600 leading-relaxed text-justify">Loading...</p>
+                    </div>
+
+                    <!-- Thành phần hữu cơ -->
+                    <div class="space-y-2 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/30">
+                        <h4 class="text-xs font-black text-emerald-800 uppercase tracking-wider">Thành phần chính</h4>
+                        <p id="detail-ingredients" class="text-xs sm:text-sm text-emerald-900 leading-relaxed">Loading...</p>
+                    </div>
+
+                    <!-- Hướng dẫn sử dụng -->
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider">Hướng dẫn sử dụng</h4>
+                        <p id="detail-usage" class="text-xs sm:text-sm text-gray-500 leading-relaxed">Loading...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ======================================================================= -->
+    <!-- FOOTER ĐỒNG BỘ -->
+    <!-- ======================================================================= -->
+    <footer class="bg-gray-950 text-white pt-20 pb-10 border-t border-emerald-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-gray-800">
+                <div class="space-y-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                            <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-black tracking-wider text-white">
+                            GREEN<span class="text-emerald-500">GLOW</span>
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Hệ sinh thái mỹ phẩm thuần chay hữu cơ 100%. Nâng niu, bảo bọc làn da Việt bằng nguồn năng lượng chữa lành tinh khiết nhất từ thiên nhiên.
+                    </p>
+                </div>
+
+                <div class="space-y-5 md:pl-8">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Liên Kết</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="./index.html" class="hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Trang chủ</span></a></li>
+                        <li><a href="./index.html#san-pham" class="hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Cửa hàng</span></a></li>
+                        <li><a href="./about.html" class="hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Về chúng tôi</span></a></li>
+                        <li><a href="./contact.html" class="hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Liên hệ</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-5">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Liên Hệ</h3>
+                    <ul class="space-y-3.5 text-sm text-gray-400">
+                        <li class="flex items-start space-x-3"><span>Email: support@greenglow.vn</span></li>
+                        <li class="flex items-start space-x-3"><span>Hotline: 1900 8198</span></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-5">
+                    <h3 class="text-sm font-bold tracking-widest uppercase text-emerald-400">Chứng nhận xanh</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl text-center"><span class="text-xs font-bold text-emerald-400">VEGAN</span></div>
+                        <div class="bg-gray-900 border border-emerald-900/10 p-3 rounded-xl text-center"><span class="text-xs font-bold text-emerald-400">ORGANIC</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 space-y-4 sm:space-y-0">
+                <p>&copy; 2026 GreenGlow Organic. Bảo lưu mọi quyền.</p>
+                <div class="flex space-x-6">
+                    <a href="./privacy-policy.html" class="hover:text-emerald-400 transition-colors">Chính sách bảo mật</a>
+                    <a href="./terms-of-service.html" class="hover:text-emerald-400 transition-colors">Điều khoản dịch vụ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MÃ JAVASCRIPT ĐIỀU PHỐI DỮ LIỆU ĐỘNG -->
+    <!-- ========================================== -->
+    <script>
+        // 1. Kho cơ sở dữ liệu các sản phẩm của GreenGlow
+        const productsCatalog = {
+            "serum": {
+                id: "greenglow-serum-v2",
+                name: "Tinh Chất Thuần Chay GreenGlow Vegan Serum",
+                price: 500000,
+                priceText: "500.000 ₫",
+                image: "https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=600&auto=format&fit=crop",
+                category: "Serum Phục Hồi",
+                description: "Tinh chất tế bào gốc thực vật và chiết xuất lô hội cô đặc cao cấp giúp phục hồi nhanh chóng làn da đang bị hư tổn, cấp nước tầng sâu đa tầng, giảm nếp nhăn mảnh và thúc đẩy tăng sinh Collagen tự nhiên nhanh chóng gấp 3 lần.",
+                ingredients: "Chiết xuất Trà xanh hữu cơ 45%, Tinh chất Lô hội cô đặc, Hyaluronic Acid thủy phân, Niacinamide 5%, Vitamin B5 tinh khiết, Rau má rừng lành tính.",
+                usage: "Sau bước làm sạch và Toner, thoa đều 3-4 giọt serum lên toàn bộ mặt và cổ. Vỗ nhẹ 30 giây để tinh chất thấm sâu. Sử dụng đều đặn sáng và tối."
+            },
+            "toner": {
+                id: "greenglow-toner",
+                name: "Nước Hoa Hồng GreenGlow Organic Toner",
+                price: 350000,
+                priceText: "350.000 ₫",
+                image: "https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop",
+                category: "Toner Cân Bằng",
+                description: "Nước cân bằng chiết xuất hoa cúc và nước hoa hồng chưng cất hơi nước giúp ổn định độ pH sinh lý của da (5.5) ngay tức thì sau khi rửa mặt, se khít lỗ chân lông, dọn sạch tế bào sừng cặn bã và làm dịu vùng da mẩn đỏ do kích ứng.",
+                ingredients: "Nước hoa hồng hữu cơ Rosa Damascena, chiết xuất Cúc La Mã hoa khô, Glycerin thực vật 100%, chiết xuất vỏ cây Liễu trắng tự nhiên.",
+                usage: "Thấm một lượng vừa đủ toner lên bông tẩy trang hoặc đổ trực tiếp lên lòng bàn tay sạch, thoa/vỗ nhẹ nhàng lên da mặt ngay sau khi rửa sạch."
+            },
+            "son-duong": {
+                id: "greenglow-lipbalm",
+                name: "Son Dưỡng Hoa Trà GreenGlow Vegan Lip Balm",
+                price: 200000,
+                priceText: "200.000 ₫",
+                image: "https://images.unsplash.com/photo-1617224908593-961a97d8bcab?q=80&w=600&auto=format&fit=crop",
+                category: "Dưỡng Môi Thuần Chay",
+                description: "Son dưỡng chứa sáp bơ đậu mỡ kết hợp dầu hoa trà đỏ hữu cơ, làm mềm môi khô nứt nẻ chỉ sau một đêm, bảo bọc đôi môi chống lại tia UV mặt trời và mang lại sắc hồng nhẹ nhàng tươi trẻ, tràn đầy tự tin.",
+                ingredients: "Sáp Candelilla thực vật, Bơ Đậu mỡ (Shea Butter) hữu cơ, Dầu quả bơ ép lạnh, Vitamin E tự nhiên, Tinh dầu Hoa trà Nhật Bản.",
+                usage: "Thoa trực tiếp lên môi bất cứ khi nào cảm thấy môi khô ráp, hoặc bôi một lớp dày trước khi đi ngủ làm mặt nạ dưỡng ẩm môi ngủ cực kỳ hiệu quả."
+            },
+            "kem-chong-nang": {
+                id: "greenglow-sunscreen",
+                name: "Kem Chống Nắng Vật Lý GreenGlow Daily Sunscreen SPF 50+",
+                price: 450000,
+                priceText: "450.000 ₫",
+                image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=600&auto=format&fit=crop",
+                category: "Kem Chống Nắng",
+                description: "Kem chống nắng vật lý màng lọc Zinc Oxide cao cấp, tạo lớp màng bảo vệ tối ưu chống lại tia UVA, UVB và ánh sáng xanh có hại. Chất kem sữa nhẹ mịn mượt, không để lại vệt trắng bết dính, nâng tông trắng hồng nhẹ tự nhiên.",
+                ingredients: "Zinc Oxide (Non-nano) an toàn cho san hô, Titanium Dioxide, chiết xuất rễ cam thảo làm sáng da, Tinh chất trà xanh kháng oxy hóa.",
+                usage: "Lắc đều chai sữa, thoa đều một lượng kem bằng 2 ngón tay lên da mặt và vùng cổ trước khi ra ngoài 15-20 phút. Thoa lại sau mỗi 4 tiếng nếu hoạt động ngoài trời."
+            },
+            "mat-na": {
+                id: "greenglow-mask",
+                name: "Mặt Nạ Đất Sét Thảo Mộc GreenGlow Herbal Clay Mask",
+                price: 300000,
+                priceText: "300.000 ₫",
+                image: "https://images.unsplash.com/photo-1567894340164-1c7ee752a725?q=80&w=600&auto=format&fit=crop",
+                category: "Mặt Nạ Đất Sét",
+                description: "Mặt nạ đất sét Kaolin trắng mịn hấp thụ hoàn toàn bã nhờn dư thừa trong kẽ chân lông, làm sạch sâu mụn đầu đen, kháng khuẩn sưng tấy mụn sưng và dưỡng da mịn màng, ẩm mượt nhờ tinh dầu tràm trà dịu mát.",
+                ingredients: "Đất sét trắng Kaolin thiên nhiên Pháp, bột lá Trà xanh Matcha hữu cơ, tinh dầu Tràm trà (Tea Tree) tinh khiết, tinh chất rau má kháng viêm.",
+                usage: "Thoa một lớp mỏng vừa đủ lên da sau khi rửa sạch mặt (tránh vùng mắt, môi). Thư giãn 10-15 phút đến khi đất sét se khô thì rửa sạch lại bằng nước ấm. Dùng 1-2 lần/tuần."
+            }
+        };
+
+        // 2. Phân tích tham số trên URL để lấy ID sản phẩm
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        const productData = productsCatalog[productId];
+
+        if (!productData) {
+            // Nếu không tìm thấy ID sản phẩm, ẩn container và hiện màn hình lỗi
+            document.getElementById('product-container').classList.add('hidden');
+            document.getElementById('product-not-found').classList.remove('hidden');
+        } else {
+            // Đổ dữ liệu sản phẩm tương ứng lên các phần tử HTML của trang chi tiết
+            document.title = `${productData.name} - GreenGlow`;
+            document.getElementById('detail-name').textContent = productData.name;
+            document.getElementById('detail-price-text').textContent = productData.priceText;
+            document.getElementById('detail-image').src = productData.image;
+            document.getElementById('detail-image').alt = productData.name;
+            document.getElementById('detail-category').textContent = productData.category;
+            document.getElementById('detail-desc').textContent = productData.description;
+            document.getElementById('detail-ingredients').textContent = productData.ingredients;
+            document.getElementById('detail-usage').textContent = productData.usage;
+
+            // Cấu hình các thuộc tính của nút mua hàng Snipcart hoạt động chính xác
+            const cartBtn = document.getElementById('add-to-cart-btn');
+            cartBtn.setAttribute('data-item-id', productData.id);
+            cartBtn.setAttribute('data-item-name', productData.name);
+            cartBtn.setAttribute('data-item-price', productData.price);
+            cartBtn.setAttribute('data-item-image', productData.image);
+            cartBtn.setAttribute('data-item-description', productData.description);
+        }
+
+        // 3. Script điều khiển thanh Menu trên điện thoại di động
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isClosed = mobileMenu.classList.toggle('hidden');
+            if (isClosed) {
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        });
+    </script>
+
+    <!-- Khởi chạy thư viện Snipcart ở chế độ nền -->
+    <script async src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
+    <div hidden id="snipcart" data-api-key="YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5"></div>
+</body>
+</html>
