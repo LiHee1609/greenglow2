@@ -523,5 +523,46 @@
             });
         });
     </script>
+    
+    <!-- 1. Tải thư viện EmailJS chính thức từ CDN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- 2. Đoạn mã kích hoạt tính năng gửi mail tự động -->
+<script type="text/javascript">
+    
+    // Khởi tạo EmailJS với tài khoản của bạn (Thay YOUR_PUBLIC_KEY bằng mã thật của bạn)
+    emailjs.init({
+        publicKey: "1w0j-6pvjxCmpeyIe" 
+    });
+
+    // Chờ cho hệ thống giỏ hàng Snipcart tải xong
+    document.addEventListener('snipcart.ready', () => {
+        // Lắng nghe sự kiện khi khách hàng đặt hàng và thanh toán thành công
+        Snipcart.events.on('order.completed', (order) => {
+            console.log('Phát hiện đơn hàng mới thanh toán thành công:', order);
+
+            // Tự động đóng gói dữ liệu đơn hàng thành các nhãn dễ đọc
+            const emailParams = {
+                customer_name: order.customer.name || order.billingAddress.fullName,
+                customer_email: order.customer.email,
+                order_id: order.token,
+                order_total: order.total.toLocaleString('vi-VN') + ' ₫',
+                // Duyệt qua giỏ hàng và nối tên các sản phẩm đã mua thành chuỗi chữ
+                order_items: order.items.items.map(item => `${item.name} (SL: ${item.quantity})`).join(', ')
+            };
+
+            // Tiến hành kích hoạt gửi email qua EmailJS
+            // (Hãy thay thế "YOUR_SERVICE_ID" và "YOUR_ORDER_CONFIRMATION_TEMPLATE_ID" bằng mã của bạn)
+            emailjs.send('service_p65f7pf', 'template_lqd21a2', emailParams)
+                .then((response) => {
+                    console.log('EmailJS đã gửi thư thành công!', response.status, response.text);
+                })
+                .catch((err) => {
+                    console.error('Lỗi! Không thể gửi mail xác nhận đơn hàng:', err);
+                });
+        });
+    });
+</script>
+    
 </body>
 </html>
