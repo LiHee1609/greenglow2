@@ -1,7 +1,30 @@
 <templates>
+  <!-- 1. Hiển thị thông báo ở bước Thanh toán -->
   <payment-methods-list>
     <div class="snipcart-payment-methods-list">
       <slot name="payment-method-list"></slot>
+      
+      <!-- Thông báo hướng dẫn thanh toán -->
+      <div style="margin-top: 20px; padding: 15px; border: 1px solid #059669; border-radius: 8px; background-color: #f0fdf4;">
+        <h4 style="color: #065f46; margin: 0 0 5px 0; font-size: 14px;">💳 Phương thức thanh toán</h4>
+        <p style="font-size: 13px; color: #374151; margin: 0;">Sau khi nhấn Đặt hàng, bạn sẽ nhận được mã QR MoMo hoặc ZaloPay để thanh toán.</p>
+      </div>
     </div>
   </payment-methods-list>
+
+  <!-- 2. Hiển thị thông tin sau khi đặt hàng thành công -->
+  <html-confirmation>
+    <div class="snipcart-order-confirmation">
+      <h2 style="color: #059669;">Đặt hàng thành công!</h2>
+      <p>Cảm ơn bạn đã tin tưởng GreenGlow.</p>
+      
+      <!-- Chỉ dùng HTML thuần, KHÔNG DÙNG v-if -->
+      <div style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+        <p>Vui lòng chuyển khoản với nội dung: <strong>GREENGLOW [Mã đơn hàng]</strong></p>
+        <p>Sau khi nhận được thông tin, chúng tôi sẽ xác nhận đơn hàng qua email cho bạn.</p>
+      </div>
+      
+      <button class="snipcart-button-primary" onclick="window.location.reload()">Quay lại trang chủ</button>
+    </div>
+  </html-confirmation>
 </templates>
