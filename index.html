@@ -560,54 +560,36 @@
       savedTotal = order.grandTotal;
       savedInvoice = order.invoiceNumber || ("GG" + Date.now().toString().slice(-6));
 
-      // Đợi giao diện html-confirmation tải xong thì dựng mã mặc định là MoMo
-      setTimeout(() => {
-        changePaymentQR('momo');
-      }, 400);
+     <script>
+  document.addEventListener('snipcart.ready', () => {
+    // Lắng nghe sự kiện khi người dùng chuyển sang bước thanh toán
+    Snipcart.events.on('theme.routechanged', (route) => {
+      if (route.to === '/checkout') {
+        injectPaymentInstructions();
+      }
     });
   });
 
-  function changePaymentQR(type) {
-    const box = document.getElementById('dynamic-qr-box');
-    const tabMomo = document.getElementById('tab-momo');
-    const tabZalo = document.getElementById('tab-zalopay');
-    if (!box) return;
-
-    const formattedAmount = savedTotal.toLocaleString('vi-VN') + ' ₫';
-
-    if (type === 'momo') {
-      // Đổi trạng thái nút tích cực
-      tabMomo.style.background = '#a21caf'; tabMomo.style.color = 'white'; tabMomo.style.borderColor = '#a21caf';
-      tabZalo.style.background = 'white'; tabZalo.style.color = '#0284c7'; tabZalo.style.borderColor = '#cbd5e1';
-
-      // Link sinh QR tự động theo ngân hàng / Số ví MoMo của bạn thông qua VietQR
-      const qrMomo = `https://img.vietqr.io/image/970418-0912345678-compact.png?amount=${savedTotal}&addInfo=GREENGLOW%20${savedInvoice}`;
-
-      box.innerHTML = `
-        <div style="animation: fadeIn 0.2s;">
-            <h3 style="color: #a21caf; margin: 0 0 10px; font-size: 15px;">Quét mã bằng ứng dụng MoMo</h3>
-            <img src="${qrMomo}" style="width: 190px; height: 190px; margin: 0 auto; display: block; border: 1px solid #e2e8f0; padding: 6px; background: white; border-radius: 8px;" alt="QR MoMo" />
-            <p style="margin: 10px 0 0; font-size: 15px; font-weight: bold; color: #dc2626;">Số tiền: ${formattedAmount}</p>
-            <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">Nội dung CK: <strong style="color: #a21caf;">GREENGLOW ${savedInvoice}</strong></p>
-        </div>
-      `;
-    } else {
-      // Đổi trạng thái nút tích cực
-      tabZalo.style.background = '#0284c7'; tabZalo.style.color = 'white'; tabZalo.style.borderColor = '#0284c7';
-      tabMomo.style.background = 'white'; tabMomo.style.color = '#a21caf'; tabMomo.style.borderColor = '#cbd5e1';
-
-      // Link sinh QR tự động cho ví ZaloPay/Ngân hàng liên thông
-      const qrZalo = `https://img.vietqr.io/image/970403-10123456789-compact.png?amount=${savedTotal}&addInfo=GREENGLOW%20${savedInvoice}`;
-
-      box.innerHTML = `
-        <div style="animation: fadeIn 0.2s;">
-            <h3 style="color: #0284c7; margin: 0 0 10px; font-size: 15px;">Quét mã bằng ZaloPay hoặc Ngân hàng</h3>
-            <img src="${qrZalo}" style="width: 190px; height: 190px; margin: 0 auto; display: block; border: 1px solid #e2e8f0; padding: 6px; background: white; border-radius: 8px;" alt="QR ZaloPay" />
-            <p style="margin: 10px 0 0; font-size: 15px; font-weight: bold; color: #dc2626;">Số tiền: ${formattedAmount}</p>
-            <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">Nội dung CK: <strong style="color: #0284c7;">GREENGLOW ${savedInvoice}</strong></p>
-        </div>
-      `;
-    }
+  function injectPaymentInstructions() {
+    // Đợi một chút cho Snipcart render DOM
+    setTimeout(() => {
+      const target = document.querySelector('.snipcart-payment-methods-list');
+      if (target && !document.getElementById('custom-payment-box')) {
+        const customDiv = document.createElement('div');
+        customDiv.id = 'custom-payment-box';
+        customDiv.style.marginTop = '20px';
+        customDiv.style.padding = '15px';
+        customDiv.style.border = '1px solid #059669';
+        customDiv.style.borderRadius = '8px';
+        customDiv.style.backgroundColor = '#f0fdf4';
+        
+        customDiv.innerHTML = `
+          <h4 style="color: #065f46; margin: 0 0 10px 0;">💳 Thanh toán qua Ví điện tử</h4>
+          <p style="font-size: 13px; color: #374151;">Sau khi nhấn Đặt hàng, bạn sẽ nhận được thông tin quét mã QR MoMo hoặc ZaloPay để hoàn tất thanh toán.</p>
+        `;
+        target.appendChild(customDiv);
+      }
+    }, 500);
   }
 </script>
     
