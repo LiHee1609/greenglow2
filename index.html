@@ -440,76 +440,49 @@
 
 <!-- 2. ĐOẠN SCRIPT ĐIỀU PHỐI ĐỌC PHƯƠNG THỨC & VẼ QR-CODE (Dán ở cuối file index.html, trước thẻ đóng </body>) -->
 <script>
-    function updateInstructionUI(method) {
-        const box = document.getElementById('payment-instruction-box');
-        const title = document.getElementById('instruction-title');
-        const qrImg = document.getElementById('qr-code-img');
-        const qrWrapper = document.getElementById('qr-code-wrapper');
-        const step1 = document.getElementById('instruction-text-step1');
-        const content = document.getElementById('transfer-content');
-
-        if (!box) return;
-
-        let cartTotal = 0;
-        let cartId = "GG" + Math.floor(Math.random() * 900000 + 100000);
-        
-        if (window.Snipcart) {
-            try {
-                const state = Snipcart.store.getState();
-                cartTotal = state.cart.total || 0;
-                cartId = state.cart.token ? state.cart.token.substring(0, 8).toUpperCase() : cartId;
-            } catch (e) {
-                console.warn("Chưa khởi tạo xong dữ liệu giỏ hàng", e);
-            }
-        }
-
-        if (content) {
-            content.textContent = `GREENGLOW ${cartId}`;
-        }
-
-        if (method === 'cod') {
-            box.style.display = 'none';
-        } else {
-            box.style.display = 'block';
-            
-            if (method === 'momo') {
-                if (title) title.textContent = "Hướng dẫn thanh toán qua MoMo";
-                if (step1) step1.innerHTML = `Mở ứng dụng <strong>MoMo</strong>, chọn quét mã chuyển tiền để thanh toán số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
-                
-                const yourPhone = "0912345678"; 
-                const yourName = "NGUYEN VAN A";
-                if (qrImg) qrImg.src = `https://api.vietqr.io/image/970418-${yourPhone}-momo.jpg?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}&accountName=${encodeURIComponent(yourName)}`;
-                if (qrWrapper) qrWrapper.style.display = 'inline-block';
-            } 
-            else if (method === 'zalopay') {
-                if (title) title.textContent = "Hướng dẫn thanh toán qua ZaloPay";
-                if (step1) step1.innerHTML = `Quét mã bên bằng ứng dụng <strong>ZaloPay</strong> hoặc ngân hàng bất kỳ để chuyển khoản số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
-                
-                const bankId = "VCB"; 
-                const accountNumber = "10123456789"; 
-                if (qrImg) qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNumber}-qr_only.png?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}`;
-                if (qrWrapper) qrWrapper.style.display = 'inline-block';
-            }
-        }
+  // Hàm xử lý việc lựa chọn phương thức thanh toán an toàn
+  function selectPayment(method) {
+    // 1. Tắt trạng thái hoạt động của toàn bộ các nút tùy chọn cũ
+    document.querySelectorAll('.custom-payment-option').forEach(el => {
+      el.classList.remove('active');
+    });
+    
+    // 2. Kích hoạt nút lựa chọn hiện tại và đánh dấu ô radio tương ứng
+    const activeOpt = document.getElementById('opt-' + method);
+    if (activeOpt) {
+      activeOpt.classList.add('active');
+      const radio = document.getElementById('radio-' + method);
+      if (radio) {
+        radio.checked = true;
+      }
     }
 
-    // Observer theo dõi Snipcart dựng giao diện để kích hoạt bộ điều hướng
-    const paymentObserver = new MutationObserver((mutations) => {
-        const box = document.getElementById('payment-instruction-box');
-        if (box && box.dataset.initialized !== 'true') {
-            box.dataset.initialized = 'true';
-            const checkedMethod = document.querySelector('input[name="payment-method"]:checked');
-            updateInstructionUI(checkedMethod ? checkedMethod.value : 'cod');
-        }
-    });
+    // 3. Lưu phương thức thanh toán đã chọn vào trình duyệt của khách hàng
+    localStorage.setItem('selected_payment_method', method);
 
-    paymentObserver.observe(document.body, { childList: true, subtree: true });
+    // 4. Kích hoạt ngầm bộ chọn mặc định của Snipcart để kích hoạt nút "Đặt hàng"
+    setTimeout(() => {
+      // Tìm danh sách phương thức mặc định của Snipcart (Đang bị chúng ta ẩn bằng CSS)
+      const defaultMethods = document.querySelectorAll('.snipcart-payment-methods-list input[type="radio"]');
+      if (defaultMethods && defaultMethods.length > 0) {
+        // Luôn nhấp chọn phương thức đầu tiên có sẵn để kích hoạt nút "Đặt hàng"
+        defaultMethods[0].click();
+      }
+    }, 100);
+  }
 
-    document.addEventListener('change', (e) => {
-        if (e.target && e.target.name === 'payment-method') {
-            updateInstructionUI(e.target.value);
-        }
+  // Lắng nghe sự kiện giỏ hàng mở để thiết lập mặc định lúc ban đầu
+  document.addEventListener('snipcart.ready', () => {
+    // Lắng nghe khi người dùng bắt đầu tiến trình thanh toán
+    Snipcart.events.on('theme.routechanged', (routes) => {
+      if (routes.to === '/checkout') {
+        // Tự động khôi phục lựa chọn mặc định ban đầu là MoMo sau khi giao diện dựng xong
+        setTimeout(() => {
+          selectPayment('momo');
+        }, 800);
+      }
     });
+  });
 </script>
     <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
     <script>
