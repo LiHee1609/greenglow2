@@ -1,12 +1,8 @@
 /**
  * =======================================================================================
- * HỆ THỐNG GỬI MAIL TỰ ĐỘNG SIÊU CẤP - GREENGLOW (PHIÊN BẢN TỰ VÁ LỖI)
- * Tích hợp thông minh giữa Snipcart SDK và EmailJS API
+ * HỆ THỐNG GỬI MAIL TỰ ĐỘNG SIÊU CẤP - GREENGLOW (PHIÊN BẢN CHUẨN SNIPCART V3)
+ * Tích hợp thông minh giữa Snipcart SDK v3 (cart.confirmed) và EmailJS API
  * =======================================================================================
- * * Tính năng đặc biệt:
- * - Tự động tải thư viện EmailJS nếu website bị thiếu.
- * - Tự động sửa lỗi bất đồng bộ khi tải Snipcart.
- * - Hỗ trợ lệnh kiểm thử nhanh ngay trên Console trình duyệt (F12).
  */
 
 (function() {
@@ -14,25 +10,33 @@
     const SERVICE_ID = "service_p65f7pf";
     const TEMPLATE_ID = "template_lqd21a2";
 
-    console.log("🚀 [GreenGlow Mailer] Hệ thống gửi mail đang khởi động...");
+    console.log("🚀 [GreenGlow Mailer] Hệ thống gửi mail phiên bản Snipcart V3 đang khởi động...");
 
-    // Hàm thực hiện gửi email qua EmailJS
     function sendOrderConfirmationEmail(order) {
-        console.log("📦 [EmailJS] Đang chuẩn bị đóng gói dữ liệu đơn hàng...", order);
+        console.log("📦 [EmailJS] Đang đóng gói dữ liệu đơn hàng thực tế từ Snipcart...", order);
 
-        const customerName = order.customer?.name || order.billingAddress?.fullName || "Khách hàng GreenGlow";
+        // Chuẩn hóa dữ liệu khách hàng (Snipcart v3 lưu trong billingAddress hoặc email trực tiếp)
+        const customerName = order.customer?.name || order.billingAddress?.fullName || order.billingAddress?.name || "Khách hàng GreenGlow";
         const customerEmail = order.customer?.email || order.billingAddress?.email || order.email;
         const orderId = order.token || order.id || "N/A";
         
+        // Định dạng tiền tệ VND (Ví dụ: 500.000 ₫)
         const orderTotal = typeof order.total === 'number' 
             ? order.total.toLocaleString('vi-VN') + ' ₫' 
             : order.total + ' ₫';
 
+        // Chuẩn hóa danh sách sản phẩm đã mua
         let orderItems = "Mỹ phẩm hữu cơ thiên nhiên GreenGlow";
-        if (order.items && order.items.items) {
-            orderItems = order.items.items.map(item => `${item.name} (SL: ${item.quantity})`).join(', ');
-        } else if (order.items && Array.isArray(order.items)) {
-            orderItems = order.items.map(item => `${item.name} (SL: ${item.quantity})`).join(', ');
+        let itemsArray = [];
+        
+        if (order.items && Array.isArray(order.items)) {
+            itemsArray = order.items;
+        } else if (order.items && order.items.items && Array.isArray(order.items.items)) {
+            itemsArray = order.items.items;
+        }
+
+        if (itemsArray.length > 0) {
+            orderItems = itemsArray.map(item => `${item.name} (SL: ${item.quantity})`).join(', ');
         }
 
         const emailParams = {
@@ -43,18 +47,17 @@
             order_items: orderItems
         };
 
-        console.log("📧 [EmailJS] Đang đẩy dữ liệu lên Template...", emailParams);
+        console.log("📧 [EmailJS] Đang đẩy dữ liệu chuẩn hóa lên Template...", emailParams);
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
             .then((response) => {
                 console.log('🎉 [EmailJS] Gửi thư xác nhận đơn hàng thành công rực rỡ!', response.status, response.text);
             })
             .catch((err) => {
-                console.error('❌ [EmailJS] Gửi mail thất bại. Chi tiết lỗi:', err);
+                console.error('❌ [EmailJS] Gửi mail thất bại. Chi tiết lỗi từ API:', err);
             });
     }
 
-    // Khởi tạo EmailJS sau khi chắc chắn thư viện đã tải xong
     function initEmailJS() {
         if (typeof emailjs !== 'undefined') {
             emailjs.init({
@@ -62,7 +65,7 @@
             });
             console.log("✅ [EmailJS] Khởi tạo thành công kết nối.");
             
-            // Đăng ký lệnh kiểm thử nhanh toàn cục trên F12 Console để bạn test bất cứ lúc nào!
+            // Đăng ký lệnh kiểm thử nhanh toàn cục trên F12 Console
             window.testSendMail = function(testEmail) {
                 if (!testEmail) {
                     console.error("❌ Thiếu email nhận! Hãy gõ theo cú pháp: testSendMail('email_cua_ban@gmail.com')");
@@ -80,11 +83,10 @@
                 sendOrderConfirmationEmail(mockOrder);
                 return "Đang truyền lệnh gửi... Hãy theo dõi log phía dưới hoặc kiểm tra hòm thư của bạn!";
             };
-            console.log("💡 [Tips] Bạn có thể gõ lệnh: testSendMail('email_cua_ban@gmail.com') ngay tại đây và nhấn Enter để test gửi thư!");
+            console.log("💡 [Tips] Bạn có thể gõ lệnh: testSendMail('email_cua_ban@gmail.com') tại đây để kiểm tra.");
         }
     }
 
-    // TỰ ĐỘNG TẢI THƯ VIỆN EMAILJS NẾU THIẾU
     if (typeof emailjs === 'undefined') {
         console.log("loader: Thư viện EmailJS chưa có sẵn. Đang tự động tải về từ CDN...");
         const script = document.createElement('script');
@@ -98,16 +100,16 @@
         initEmailJS();
     }
 
-    // KẾT NỐI BỘ LẮNG NGHE SỰ KIỆN SNIPCART
     function initializeSnipcartListener() {
         console.log("✅ [Snipcart] Đã kết nối thành công bộ lắng nghe đơn hàng.");
-        Snipcart.events.on('order.completed', (order) => {
-            console.log("🔔 [Snipcart] Phát hiện đơn hàng mới thanh toán hoàn tất!");
-            sendOrderConfirmationEmail(order);
+        
+        // SỬA ĐỔI QUAN TRỌNG: Đổi từ 'order.completed' sang 'cart.confirmed' cho chuẩn v3
+        Snipcart.events.on('cart.confirmed', (cartState) => {
+            console.log("🔔 [Snipcart] Phát hiện đơn hàng mới thanh toán hoàn tất (cart.confirmed)!");
+            sendOrderConfirmationEmail(cartState);
         });
     }
 
-    // Xử lý nạp bất đồng bộ Snipcart
     if (window.Snipcart) {
         initializeSnipcartListener();
     } else {
