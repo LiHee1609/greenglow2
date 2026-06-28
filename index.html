@@ -453,7 +453,7 @@
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                     
                     <!-- Lựa chọn MoMo -->
-                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('momo')">
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
                         <input type="radio" name="payment-method" value="momo" style="accent-color: #059669;">
                         <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="Ví MoMo" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
                         <div style="display: flex; flex-direction: column;">
@@ -463,7 +463,7 @@
                     </label>
 
                     <!-- Lựa chọn ZaloPay -->
-                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('zalopay')">
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
                         <input type="radio" name="payment-method" value="zalopay" style="accent-color: #059669;">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77-uI6D3XkZ4-IlyxRk3R86T6qE6Oq3575A&s" alt="ZaloPay" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
                         <div style="display: flex; flex-direction: column;">
@@ -473,7 +473,7 @@
                     </label>
 
                     <!-- Lựa chọn COD -->
-                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('cod')">
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
                         <input type="radio" name="payment-method" value="cod" checked style="accent-color: #059669;">
                         <div style="height: 32px; width: 32px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">
                             COD
@@ -554,7 +554,8 @@
 
 <!-- ĐOẠN MÃ ĐIỀU PHỐI HIỂN THỊ MÃ QR TRONG LÚC ĐANG THANH TOÁN (CHECKOUT) -->
 <script>
-    function showPaymentInstruction(method) {
+    // Hàm cập nhật trạng thái UI của khung quét mã QR
+    function updateInstructionUI(method) {
         const box = document.getElementById('payment-instruction-box');
         const title = document.getElementById('instruction-title');
         const qrImg = document.getElementById('qr-code-img');
@@ -562,18 +563,25 @@
         const step1 = document.getElementById('instruction-text-step1');
         const content = document.getElementById('transfer-content');
 
+        if (!box) return; // Nếu khung chưa được vẽ ra, bỏ qua để tránh lỗi
+
         let cartTotal = 0;
         let cartId = "GG" + Math.floor(Math.random() * 900000 + 100000);
         
         if (window.Snipcart) {
-            const state = Snipcart.store.getState();
-            cartTotal = state.cart.total || 0;
-            // Lấy mã phiên giỏ hàng làm nội dung chuyển khoản để đối soát dòng tiền
-            cartId = state.cart.token ? state.cart.token.substring(0, 8).toUpperCase() : cartId;
+            try {
+                const state = Snipcart.store.getState();
+                cartTotal = state.cart.total || 0;
+                cartId = state.cart.token ? state.cart.token.substring(0, 8).toUpperCase() : cartId;
+            } catch (e) {
+                console.warn("Chưa khởi tạo xong dữ liệu giỏ hàng", e);
+            }
         }
 
-        // Định dạng nội dung chuyển khoản mẫu
-        content.textContent = `GREENGLOW ${cartId}`;
+        // Tạo nội dung đối soát đơn hàng
+        if (content) {
+            content.textContent = `GREENGLOW ${cartId}`;
+        }
 
         if (method === 'cod') {
             box.style.display = 'none';
@@ -581,39 +589,51 @@
             box.style.display = 'block';
             
             if (method === 'momo') {
-                title.textContent = "Hướng dẫn thanh toán qua MoMo";
-                step1.innerHTML = `Mở ứng dụng <strong>MoMo</strong>, chọn quét mã chuyển tiền để thanh toán số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
+                if (title) title.textContent = "Hướng dẫn thanh toán qua MoMo";
+                if (step1) step1.innerHTML = `Mở ứng dụng <strong>MoMo</strong>, chọn quét mã chuyển tiền để thanh toán số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
                 
-                // Liên kết API sinh mã VietQR MoMo tự động (Hãy đổi số điện thoại của bạn ở đây)
                 const yourPhone = "0912345678"; 
                 const yourName = "NGUYEN VAN A";
-                qrImg.src = `https://api.vietqr.io/image/970418-${yourPhone}-momo.jpg?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}&accountName=${encodeURIComponent(yourName)}`;
-                qrWrapper.style.display = 'inline-block';
+                if (qrImg) qrImg.src = `https://api.vietqr.io/image/970418-${yourPhone}-momo.jpg?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}&accountName=${encodeURIComponent(yourName)}`;
+                if (qrWrapper) qrWrapper.style.display = 'inline-block';
             } 
             else if (method === 'zalopay') {
-                title.textContent = "Hướng dẫn thanh toán qua ZaloPay";
-                step1.innerHTML = `Quét mã bên bằng ứng dụng <strong>ZaloPay</strong> hoặc ngân hàng bất kỳ để chuyển khoản số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
+                if (title) title.textContent = "Hướng dẫn thanh toán qua ZaloPay";
+                if (step1) step1.innerHTML = `Quét mã bên bằng ứng dụng <strong>ZaloPay</strong> hoặc ngân hàng bất kỳ để chuyển khoản số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
                 
-                // Liên kết API sinh mã VietQR ZaloPay qua Vietcombank (Hãy đổi số tài khoản của bạn ở đây)
                 const bankId = "VCB"; 
                 const accountNumber = "10123456789"; 
-                qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNumber}-qr_only.png?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}`;
-                qrWrapper.style.display = 'inline-block';
+                if (qrImg) qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNumber}-qr_only.png?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}`;
+                if (qrWrapper) qrWrapper.style.display = 'inline-block';
             }
         }
     }
 
-    // Tự động kích hoạt khi giỏ hàng Snipcart được mở ra
-    document.addEventListener('snipcart.ready', () => {
-        Snipcart.events.on('cart.opened', () => {
-            setTimeout(() => {
-                // Đặt COD làm mặc định ban đầu khi mở giỏ hàng
-                const checkedMethod = document.querySelector('input[name="payment-method"]:checked');
-                if (checkedMethod) {
-                    showPaymentInstruction(checkedMethod.value);
-                }
-            }, 600);
-        });
+    // BƯỚC ĐỘT PHÁ: Sử dụng MutationObserver để theo dõi bất kỳ khi nào Snipcart vẽ giao diện thanh toán ra màn hình
+    const paymentObserver = new MutationObserver((mutations) => {
+        const box = document.getElementById('payment-instruction-box');
+        // Nếu tìm thấy hộp hướng dẫn và nó chưa từng được khởi tạo sự kiện
+        if (box && box.dataset.initialized !== 'true') {
+            box.dataset.initialized = 'true'; // Đánh dấu đã cấu hình tránh lặp vô hạn
+            
+            // Tìm phương thức đang được tích chọn mặc định ban đầu
+            const checkedMethod = document.querySelector('input[name="payment-method"]:checked');
+            if (checkedMethod) {
+                updateInstructionUI(checkedMethod.value);
+            } else {
+                updateInstructionUI('cod');
+            }
+        }
+    });
+
+    // Bắt đầu theo dõi toàn bộ thay đổi cấu trúc của trang web
+    paymentObserver.observe(document.body, { childList: true, subtree: true });
+
+    // Lắng nghe sự kiện click thay đổi phương thức thanh toán toàn cục (Event Delegation)
+    document.addEventListener('change', (e) => {
+        if (e.target && e.target.name === 'payment-method') {
+            updateInstructionUI(e.target.value);
+        }
     });
 </script>
     <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
