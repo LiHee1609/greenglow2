@@ -440,50 +440,101 @@
 
 <!-- 2. ĐOẠN SCRIPT ĐIỀU PHỐI ĐỌC PHƯƠNG THỨC & VẼ QR-CODE (Dán ở cuối file index.html, trước thẻ đóng </body>) -->
 <script>
-  // Hàm xử lý việc lựa chọn phương thức thanh toán an toàn
-  function selectPayment(method) {
-    // 1. Tắt trạng thái hoạt động của toàn bộ các nút tùy chọn cũ
-    document.querySelectorAll('.custom-payment-option').forEach(el => {
-      el.classList.remove('active');
-    });
-    
-    // 2. Kích hoạt nút lựa chọn hiện tại và đánh dấu ô radio tương ứng
-    const activeOpt = document.getElementById('opt-' + method);
-    if (activeOpt) {
-      activeOpt.classList.add('active');
-      const radio = document.getElementById('radio-' + method);
-      if (radio) {
-        radio.checked = true;
+    /**
+     * Hàm điều hướng và bắt buộc Snipcart cập nhật trạng thái thanh toán
+     * @param {string} method - 'momo' | 'zalopay' | 'cod'
+     */
+    function selectPayment(method) {
+      console.log(`[GreenGlow] Khách chọn phương thức: ${method}`);
+
+      // 1. Cập nhật giao diện tùy chọn tùy chỉnh hiển thị cho khách hàng
+      document.querySelectorAll('.custom-payment-option').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      const activeOpt = document.getElementById('opt-' + method);
+      if (activeOpt) {
+        activeOpt.classList.add('active');
+        const radio = document.getElementById('radio-' + method);
+        if (radio) {
+          radio.checked = true;
+        }
       }
+
+      // 2. Lưu phương thức đã chọn vào LocalStorage để hiển thị QR ở màn hình thành công
+      localStorage.setItem('selected_payment_method', method);
+
+      // 3. ĐỒNG BỘ LÕI VUE.JS CỦA SNIPCART (ĐÃ SỬA LỖI KHÔNG HIỂN THỊ NÚT ĐẶT HÀNG)
+      let attempt = 0;
+      const maxAttempts = 20; // Thử quét và liên kết DOM liên tục trong 2 giây
+
+      const syncWithSnipcartEngine = () => {
+        // Tìm toàn bộ thẻ radio mặc định của Snipcart đang bị ẩn dưới lớp CSS
+        const nativeRadios = document.querySelectorAll(
+          '.snipcart-payment-methods-list input[type="radio"], ' +
+          '.snipcart-payment-method input[type="radio"], ' +
+          'input[name="payment-method"], ' +
+          '.snipcart-payment-methods-list-item input[type="radio"]'
+        );
+
+        if (nativeRadios && nativeRadios.length > 0) {
+          // Chọn cổng thanh toán mặc định đầu tiên để kích hoạt nút đặt hàng
+          const targetRadio = nativeRadios[0];
+          
+          targetRadio.checked = true;
+
+          // Tạo và kích hoạt toàn bộ chuỗi sự kiện của Vue.js mong muốn nhận được
+          const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+          const inputEvent = new Event('input', { bubbles: true, cancelable: true });
+          
+          targetRadio.dispatchEvent(changeEvent);
+          targetRadio.dispatchEvent(inputEvent);
+          
+          // Thực thi lệnh click vật lý giả lập
+          targetRadio.click();
+
+          console.log("🎯 [GreenGlow] Đã đồng bộ sự kiện VueJS thành công! Nút Đặt hàng đã được kích hoạt.");
+        } else {
+          attempt++;
+          if (attempt < maxAttempts) {
+            setTimeout(syncWithSnipcartEngine, 100);
+          } else {
+            console.error("⚠️ [GreenGlow] Không tìm thấy phần tử thanh toán gốc của Snipcart để đồng bộ.");
+          }
+        }
+      };
+
+      syncWithSnipcartEngine();
     }
 
-    // 3. Lưu phương thức thanh toán đã chọn vào trình duyệt của khách hàng
-    localStorage.setItem('selected_payment_method', method);
+    // Theo dõi trạng thái giỏ hàng mở để cấu hình lựa chọn mặc định ban đầu
+    document.addEventListener('snipcart.ready', () => {
+      Snipcart.events.on('theme.routechanged', (routes) => {
+        if (routes.to === '/checkout') {
+          console.log("🛒 [GreenGlow] Người dùng đã vào trang Checkout.");
+          
+          // Theo dõi thay đổi DOM trực tiếp bằng MutationObserver để thực thi ngay khi thanh toán xuất hiện
+          const container = document.getElementById('snipcart');
+          if (container) {
+            const observer = new MutationObserver((mutations, obs) => {
+              const momoOpt = document.getElementById('opt-momo');
+              if (momoOpt) {
+                console.log("⚡ [GreenGlow] Giao diện thanh toán đã nạp. Tự động kích hoạt MoMo...");
+                selectPayment('momo');
+                obs.disconnect(); // Ngắt quan sát ngay khi cấu hình xong
+              }
+            });
+            observer.observe(container, { childList: true, subtree: true });
+          }
 
-    // 4. Kích hoạt ngầm bộ chọn mặc định của Snipcart để kích hoạt nút "Đặt hàng"
-    setTimeout(() => {
-      // Tìm danh sách phương thức mặc định của Snipcart (Đang bị chúng ta ẩn bằng CSS)
-      const defaultMethods = document.querySelectorAll('.snipcart-payment-methods-list input[type="radio"]');
-      if (defaultMethods && defaultMethods.length > 0) {
-        // Luôn nhấp chọn phương thức đầu tiên có sẵn để kích hoạt nút "Đặt hàng"
-        defaultMethods[0].click();
-      }
-    }, 100);
-  }
-
-  // Lắng nghe sự kiện giỏ hàng mở để thiết lập mặc định lúc ban đầu
-  document.addEventListener('snipcart.ready', () => {
-    // Lắng nghe khi người dùng bắt đầu tiến trình thanh toán
-    Snipcart.events.on('theme.routechanged', (routes) => {
-      if (routes.to === '/checkout') {
-        // Tự động khôi phục lựa chọn mặc định ban đầu là MoMo sau khi giao diện dựng xong
-        setTimeout(() => {
-          selectPayment('momo');
-        }, 800);
-      }
+          // Dự phòng dự phòng thời gian
+          setTimeout(() => {
+            selectPayment('momo');
+          }, 1000);
+        }
+      });
     });
-  });
-</script>
+  </script>
     <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
     <script>
         if (window.netlifyIdentity) {
