@@ -549,6 +549,67 @@
             });
         });
     </script>
+
+    <script>
+  let savedTotal = 0;
+  let savedInvoice = "";
+
+  document.addEventListener('snipcart.ready', () => {
+    // Lắng nghe khi người dùng hoàn thành đơn hàng thành công
+    Snipcart.events.on('order.completed', (order) => {
+      savedTotal = order.grandTotal;
+      savedInvoice = order.invoiceNumber || ("GG" + Date.now().toString().slice(-6));
+
+      // Đợi giao diện html-confirmation tải xong thì dựng mã mặc định là MoMo
+      setTimeout(() => {
+        changePaymentQR('momo');
+      }, 400);
+    });
+  });
+
+  function changePaymentQR(type) {
+    const box = document.getElementById('dynamic-qr-box');
+    const tabMomo = document.getElementById('tab-momo');
+    const tabZalo = document.getElementById('tab-zalopay');
+    if (!box) return;
+
+    const formattedAmount = savedTotal.toLocaleString('vi-VN') + ' ₫';
+
+    if (type === 'momo') {
+      // Đổi trạng thái nút tích cực
+      tabMomo.style.background = '#a21caf'; tabMomo.style.color = 'white'; tabMomo.style.borderColor = '#a21caf';
+      tabZalo.style.background = 'white'; tabZalo.style.color = '#0284c7'; tabZalo.style.borderColor = '#cbd5e1';
+
+      // Link sinh QR tự động theo ngân hàng / Số ví MoMo của bạn thông qua VietQR
+      const qrMomo = `https://img.vietqr.io/image/970418-0912345678-compact.png?amount=${savedTotal}&addInfo=GREENGLOW%20${savedInvoice}`;
+
+      box.innerHTML = `
+        <div style="animation: fadeIn 0.2s;">
+            <h3 style="color: #a21caf; margin: 0 0 10px; font-size: 15px;">Quét mã bằng ứng dụng MoMo</h3>
+            <img src="${qrMomo}" style="width: 190px; height: 190px; margin: 0 auto; display: block; border: 1px solid #e2e8f0; padding: 6px; background: white; border-radius: 8px;" alt="QR MoMo" />
+            <p style="margin: 10px 0 0; font-size: 15px; font-weight: bold; color: #dc2626;">Số tiền: ${formattedAmount}</p>
+            <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">Nội dung CK: <strong style="color: #a21caf;">GREENGLOW ${savedInvoice}</strong></p>
+        </div>
+      `;
+    } else {
+      // Đổi trạng thái nút tích cực
+      tabZalo.style.background = '#0284c7'; tabZalo.style.color = 'white'; tabZalo.style.borderColor = '#0284c7';
+      tabMomo.style.background = 'white'; tabMomo.style.color = '#a21caf'; tabMomo.style.borderColor = '#cbd5e1';
+
+      // Link sinh QR tự động cho ví ZaloPay/Ngân hàng liên thông
+      const qrZalo = `https://img.vietqr.io/image/970403-10123456789-compact.png?amount=${savedTotal}&addInfo=GREENGLOW%20${savedInvoice}`;
+
+      box.innerHTML = `
+        <div style="animation: fadeIn 0.2s;">
+            <h3 style="color: #0284c7; margin: 0 0 10px; font-size: 15px;">Quét mã bằng ZaloPay hoặc Ngân hàng</h3>
+            <img src="${qrZalo}" style="width: 190px; height: 190px; margin: 0 auto; display: block; border: 1px solid #e2e8f0; padding: 6px; background: white; border-radius: 8px;" alt="QR ZaloPay" />
+            <p style="margin: 10px 0 0; font-size: 15px; font-weight: bold; color: #dc2626;">Số tiền: ${formattedAmount}</p>
+            <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">Nội dung CK: <strong style="color: #0284c7;">GREENGLOW ${savedInvoice}</strong></p>
+        </div>
+      `;
+    }
+  }
+</script>
     
     <script src="./gui-mail.js" defer></script>
 </body>
