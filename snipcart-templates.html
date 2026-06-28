@@ -1,0 +1,110 @@
+<div id="snipcart-templates">
+    
+    <!-- ========================================================== -->
+    <!-- MẪU 1: GIAO DIỆN CHỌN PHƯƠNG THỨC THANH TOÁN (LÚC CHECKOUT) -->
+    <!-- ========================================================== -->
+    <payment-methods-list>
+        <div class="snipcart-payment-methods-list" style="font-family: sans-serif; padding: 10px 0;">
+            <h3 class="snipcart-payment-methods-list__title" style="color: #111827; font-weight: bold; margin-bottom: 16px; font-size: 16px;">
+                Chọn phương thức thanh toán:
+            </h3>
+            
+            <!-- Các phương thức thanh toán -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                
+                <!-- Lựa chọn MoMo -->
+                <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
+                    <input type="radio" name="payment-method" value="momo" style="accent-color: #059669;">
+                    <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="Ví MoMo" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán qua ví MoMo</span>
+                        <span style="font-size: 12px; color: #6b7280;">Quét mã QR chuyển khoản nhận hàng ngay</span>
+                    </div>
+                </label>
+
+                <!-- Lựa chọn ZaloPay -->
+                <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
+                    <input type="radio" name="payment-method" value="zalopay" style="accent-color: #059669;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77-uI6D3XkZ4-IlyxRk3R86T6qE6Oq3575A&s" alt="ZaloPay" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán qua ZaloPay</span>
+                        <span style="font-size: 12px; color: #6b7280;">Chuyển khoản nhanh qua ứng dụng ZaloPay</span>
+                    </div>
+                </label>
+
+                <!-- Lựa chọn COD -->
+                <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;">
+                    <input type="radio" name="payment-method" value="cod" checked style="accent-color: #059669;">
+                    <div style="height: 32px; width: 32px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">
+                        COD
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán khi nhận hàng (COD)</span>
+                        <span style="font-size: 12px; color: #6b7280;">Trả tiền mặt khi nhân viên giao hàng tận nơi</span>
+                    </div>
+                </label>
+
+            </div>
+
+            <!-- KHU VỰC HIỂN THỊ HƯỚNG DẪN QUÉT MÃ TRỰC QUAN -->
+            <div id="payment-instruction-box" style="margin-top: 16px; padding: 16px; border: 1px solid #bbf7d0; border-radius: 12px; background: #f9fbf9; display: none;">
+                <h4 style="font-weight: bold; font-size: 14px; color: #065f46; margin: 0 0 10px 0; display: flex; align-items: center; gap: 6px;">
+                    ℹ️ <span id="instruction-title">Hướng dẫn thanh toán</span>
+                </h4>
+                
+                <div style="display: flex; flex-direction: row; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    <div id="qr-code-wrapper" style="background: #fff; padding: 6px; border-radius: 8px; border: 1px solid #e5e7eb; display: inline-block;">
+                        <img id="qr-code-img" src="" alt="Mã QR thanh toán" style="height: 130px; width: 130px; display: block; object-fit: contain;">
+                    </div>
+                    <div style="font-size: 13px; color: #374151; flex: 1; min-width: 180px;">
+                        <p id="instruction-text-step1" style="margin: 0 0 8px 0;"></p>
+                        <p style="font-weight: bold; margin: 0 0 4px 0; color: #111827;">Nội dung chuyển khoản bắt buộc:</p>
+                        <code style="background: #fff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e5e7eb; font-family: monospace; color: #047857; font-weight: bold; font-size: 14px;" id="transfer-content">
+                            GG-PAYMENT
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </payment-methods-list>
+
+    <!-- ========================================================== -->
+    <!-- MẪU 2: GIAO DIỆN XÁC NHẬN ĐƠN HÀNG THÀNH CÔNG (SAU KHI ĐẶT) -->
+    <!-- ========================================================== -->
+    <html-confirmation>
+        <div class="snipcart-order-confirmation" style="font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; padding: 15px;">
+                <h2 style="color: #059669; margin-bottom: 5px;">🎉 Đặt hàng thành công!</h2>
+                <p style="margin: 5px 0;">Mã đơn hàng: <strong>{{ order.invoiceNumber }}</strong></p>
+                <p style="margin: 5px 0;">Tổng thanh toán: <strong style="color: #dc2626;">{{ order.total | money }}</strong></p>
+            </div>
+
+            <!-- 1. GIAO DIỆN HIỂN THỊ MÃ QR MOMO -->
+            <div v-if="order.paymentMethod && order.paymentMethod.includes('MoMo')" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #fdf2f8;">
+                <h3 style="color: #a21caf; margin-top: 0; font-size: 15px;">Quét mã QR MoMo để thanh toán</h3>
+                <img :src="'https://api.vietqr.io/image/970418-0912345678-momo.jpg?amount=' + order.total + '&addInfo=GREENGLOW%20' + order.invoiceNumber + '&accountName=NGUYEN%20VAN%20A'" alt="QR MoMo" style="width: 200px; height: 200px; margin: 10px auto; display: block; object-fit: contain; background: white; padding: 5px; border-radius: 6px;" />
+                <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #a21caf;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
+            </div>
+
+            <!-- 2. GIAO DIỆN HIỂN THỊ MÃ QR ZALOPAY -->
+            <div v-if="order.paymentMethod && order.paymentMethod.includes('ZaloPay')" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #f0f9ff;">
+                <h3 style="color: #0284c7; margin-top: 0; font-size: 15px;">Quét mã QR ZaloPay để thanh toán</h3>
+                <img :src="'https://img.vietqr.io/image/VCB-10123456789-qr_only.png?amount=' + order.total + '&addInfo=GREENGLOW%20' + order.invoiceNumber" alt="QR ZaloPay" style="width: 200px; height: 200px; margin: 10px auto; display: block; object-fit: contain; background: white; padding: 5px; border-radius: 6px;" />
+                <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #0284c7;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
+            </div>
+
+            <!-- 3. GIAO DIỆN HIỂN THỊ THÔNG TIN NGÂN HÀNG DỰ PHÒNG -->
+            <div v-if="order.paymentMethod && (order.paymentMethod.includes('Ngân hàng') || order.paymentMethod.includes('Deferred'))" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #f0fdf4;">
+                <h3 style="color: #16a34a; margin-top: 0; font-size: 15px;">Thông tin Chuyển khoản</h3>
+                <p style="text-align: left; font-size: 14px; margin: 5px 0 15px 0; padding-left: 20px; color: #374151;">
+                    • Ngân hàng: <strong>Vietcombank</strong><br>
+                    • Số tài khoản: <strong>1234567890</strong><br>
+                    • Chủ tài khoản: <strong>GREENGLOW SHOP</strong>
+                </p>
+                <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #16a34a;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
+            </div>
+        
+            <button class="snipcart-button-primary" onclick="window.location.reload()" style="margin-top: 15px; width: 100%; padding: 12px; cursor: pointer; border-radius: 8px; font-weight: bold; border: none; background: #059669; color: white;">Tiếp tục mua sắm</button>
+        </div>
+    </html-confirmation>
+</div>
