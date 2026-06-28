@@ -425,19 +425,92 @@
 
 
     <!-- 3. SCRIPT KÍCH HOẠT SNIPCART -->
-    <!-- LƯU Ý: Thay đổi giá trị data-api-key bằng Public API Key lấy từ Dashboard của Snipcart khi bạn deploy thực tế -->
-    <script>
-        window.SnipcartSettings = {
-            publicApiKey: 'YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5',
-            loadStrategy: 'on-user-interaction',
-            currency: 'vnd',
-            addProductBehavior: 'custom',
-        };
+<script>
+    window.SnipcartSettings = {
+        publicApiKey: 'YWE5Y2M1YzItZTdhOS00NmIzLTk2ZTYtMjRkMjhlMzgxZDVjNjM5MTcyMTcxMTQ2ODE1Mjk5',
+        loadStrategy: 'on-user-interaction',
+        currency: 'vnd',
+        addProductBehavior: 'custom',
+    };
 
-        (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
-    </script>
+    (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+</script>
 
-    <div hidden id="snipcart">
+<!-- KHỐI CHỨA CẤU HÌNH VÀ GIAO DIỆN TÙY BIẾN CHO SNIPCART -->
+<div hidden id="snipcart">
+    <templates>
+        
+        <!-- ========================================================== -->
+        <!-- MẪU 1: GIAO DIỆN CHỌN PHƯƠNG THỨC THANH TOÁN (LÚC CHECKOUT) -->
+        <!-- ========================================================== -->
+        <payment-methods-list>
+            <div class="snipcart-payment-methods-list" style="font-family: sans-serif; padding: 10px 0;">
+                <h3 class="snipcart-payment-methods-list__title" style="color: #111827; font-weight: bold; margin-bottom: 16px; font-size: 16px;">
+                    Chọn phương thức thanh toán:
+                </h3>
+                
+                <!-- Các phương thức thanh toán -->
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    
+                    <!-- Lựa chọn MoMo -->
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('momo')">
+                        <input type="radio" name="payment-method" value="momo" style="accent-color: #059669;">
+                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="Ví MoMo" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán qua ví MoMo</span>
+                            <span style="font-size: 12px; color: #6b7280;">Quét mã QR chuyển khoản nhận hàng ngay</span>
+                        </div>
+                    </label>
+
+                    <!-- Lựa chọn ZaloPay -->
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('zalopay')">
+                        <input type="radio" name="payment-method" value="zalopay" style="accent-color: #059669;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77-uI6D3XkZ4-IlyxRk3R86T6qE6Oq3575A&s" alt="ZaloPay" style="height: 32px; width: 32px; object-fit: contain; border-radius: 8px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán qua ZaloPay</span>
+                            <span style="font-size: 12px; color: #6b7280;">Chuyển khoản nhanh qua ứng dụng ZaloPay</span>
+                        </div>
+                    </label>
+
+                    <!-- Lựa chọn COD -->
+                    <label style="display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; background: #fff;" onclick="showPaymentInstruction('cod')">
+                        <input type="radio" name="payment-method" value="cod" checked style="accent-color: #059669;">
+                        <div style="height: 32px; width: 32px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">
+                            COD
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-weight: bold; font-size: 14px; color: #111827;">Thanh toán khi nhận hàng (COD)</span>
+                            <span style="font-size: 12px; color: #6b7280;">Trả tiền mặt khi nhân viên giao hàng tận nơi</span>
+                        </div>
+                    </label>
+
+                </div>
+
+                <!-- KHU VỰC HIỂN THỊ HƯỚNG DẪN QUÉT MÃ TRỰC QUAN -->
+                <div id="payment-instruction-box" style="margin-top: 16px; padding: 16px; bg-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; background: #f9fbf9; display: none;">
+                    <h4 style="font-weight: bold; font-size: 14px; color: #065f46; margin: 0 0 10px 0; display: flex; align-items: center; gap: 6px;">
+                        ℹ️ <span id="instruction-title">Hướng dẫn thanh toán</span>
+                    </h4>
+                    
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 16px; flex-wrap: wrap;">
+                        <div id="qr-code-wrapper" style="background: #fff; padding: 6px; border-radius: 8px; border: 1px solid #e5e7eb; display: inline-block;">
+                            <img id="qr-code-img" src="" alt="Mã QR thanh toán" style="height: 130px; width: 130px; display: block; object-fit: contain;">
+                        </div>
+                        <div style="font-size: 13px; color: #374151; flex: 1; min-width: 180px;">
+                            <p id="instruction-text-step1" style="margin: 0 0 8px 0;"></p>
+                            <p style="font-weight: bold; margin: 0 0 4px 0; color: #111827;">Nội dung chuyển khoản bắt buộc:</p>
+                            <code style="background: #fff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e5e7eb; font-family: monospace; color: #047857; font-weight: bold; font-size: 14px;" id="transfer-content">
+                                GG-PAYMENT
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </payment-methods-list>
+
+        <!-- ========================================================== -->
+        <!-- MẪU 2: GIAO DIỆN XÁC NHẬN ĐƠN HÀNG THÀNH CÔNG (SAU KHI ĐẶT) -->
+        <!-- ========================================================== -->
         <html-confirmation>
             <div class="snipcart-order-confirmation" style="font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
                 <div style="text-align: center; padding: 15px;">
@@ -446,39 +519,103 @@
                     <p style="margin: 5px 0;">Tổng thanh toán: <strong style="color: #dc2626;">{{ order.total | money }}</strong></p>
                 </div>
 
-                <!-- CHỖ NÀY SẼ TỰ ĐỘNG QUÉT NỘI DUNG TỪ PHƯƠNG THỨC KHÁCH CHỌN TRONG GIỎ HÀNG -->
-            
                 <!-- 1. GIAO DIỆN HIỂN THỊ MÃ QR MOMO -->
                 <div v-if="order.paymentMethod && order.paymentMethod.includes('MoMo')" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #fdf2f8;">
-                    <h3 style="color: #a21caf; margin-top: 0;">Quét mã QR MoMo để thanh toán</h3>
-                    <!-- Thay link ảnh QR MoMo thật của bạn vào đây -->
-                    <img src="https://placehold.co/250x250/a21caf/white?text=QR+MoMo" alt="QR MoMo" style="width: 200px; height: 200px; margin: 10px auto; display: block;" />
-                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong>Mã đơn hàng {{ order.invoiceNumber }}</strong></p>
+                    <h3 style="color: #a21caf; margin-top: 0; font-size: 15px;">Quét mã QR MoMo để thanh toán</h3>
+                    <!-- Tự động nạp mã QR động VietQR liên kết MoMo của bạn -->
+                    <img :src="'https://api.vietqr.io/image/970418-0912345678-momo.jpg?amount=' + order.total + '&addInfo=GREENGLOW%20' + order.invoiceNumber + '&accountName=NGUYEN%20VAN%20A'" alt="QR MoMo" style="width: 200px; height: 200px; margin: 10px auto; display: block; object-fit: contain; background: white; padding: 5px; border-radius: 6px;" />
+                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #a21caf;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
                 </div>
 
                 <!-- 2. GIAO DIỆN HIỂN THỊ MÃ QR ZALOPAY -->
                 <div v-if="order.paymentMethod && order.paymentMethod.includes('ZaloPay')" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #f0f9ff;">
-                    <h3 style="color: #0284c7; margin-top: 0;">Quét mã QR ZaloPay để thanh toán</h3>
-                    <!-- Thay link ảnh QR ZaloPay thật của bạn vào đây -->
-                    <img src="https://placehold.co/250x250/0284c7/white?text=QR+ZaloPay" alt="QR ZaloPay" style="width: 200px; height: 200px; margin: 10px auto; display: block;" />
-                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong>Mã đơn hàng {{ order.invoiceNumber }}</strong></p>
+                    <h3 style="color: #0284c7; margin-top: 0; font-size: 15px;">Quét mã QR ZaloPay để thanh toán</h3>
+                    <!-- Tự động nạp mã QR động ZaloPay liên thông qua Vietcombank -->
+                    <img :src="'https://img.vietqr.io/image/VCB-10123456789-qr_only.png?amount=' + order.total + '&addInfo=GREENGLOW%20' + order.invoiceNumber" alt="QR ZaloPay" style="width: 200px; height: 200px; margin: 10px auto; display: block; object-fit: contain; background: white; padding: 5px; border-radius: 6px;" />
+                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #0284c7;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
                 </div>
 
-                <!-- 3. GIAO DIỆN HIỂN THỊ THÔNG TIN NGÂN HÀNG -->
+                <!-- 3. GIAO DIỆN HIỂN THỊ THÔNG TIN NGÂN HÀNG DỰ PHÒNG -->
                 <div v-if="order.paymentMethod && (order.paymentMethod.includes('Ngân hàng') || order.paymentMethod.includes('Deferred'))" style="text-align: center; margin: 15px 0; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background-color: #f0fdf4;">
-                    <h3 style="color: #16a34a; margin-top: 0;">Thông tin Chuyển khoản</h3>
-                    <p style="text-align: left; font-size: 14px; margin: 5px 0 15px 0; padding-left: 20px;">
+                    <h3 style="color: #16a34a; margin-top: 0; font-size: 15px;">Thông tin Chuyển khoản</h3>
+                    <p style="text-align: left; font-size: 14px; margin: 5px 0 15px 0; padding-left: 20px; color: #374151;">
                         • Ngân hàng: <strong>Vietcombank</strong><br>
                         • Số tài khoản: <strong>1234567890</strong><br>
                         • Chủ tài khoản: <strong>GREENGLOW SHOP</strong>
                     </p>
-                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong>Mã đơn hàng {{ order.invoiceNumber }}</strong></p>
+                    <p style="font-size: 13px; color: #4b5563; margin-bottom: 0;">Nội dung chuyển khoản: <br><strong style="color: #16a34a;">GREENGLOW {{ order.invoiceNumber }}</strong></p>
                 </div>
             
-                <button class="snipcart-button-primary" onclick="window.location.reload()" style="margin-top: 15px; width: 100%; padding: 10px; cursor: pointer;">Tiếp tục mua sắm</button>
+                <button class="snipcart-button-primary" onclick="window.location.reload()" style="margin-top: 15px; width: 100%; padding: 12px; cursor: pointer; border-radius: 8px; font-weight: bold; border: none; background: #059669; color: white;">Tiếp tục mua sắm</button>
             </div>
         </html-confirmation>
-    </div>
+    </templates>
+</div>
+
+<!-- ĐOẠN MÃ ĐIỀU PHỐI HIỂN THỊ MÃ QR TRONG LÚC ĐANG THANH TOÁN (CHECKOUT) -->
+<script>
+    function showPaymentInstruction(method) {
+        const box = document.getElementById('payment-instruction-box');
+        const title = document.getElementById('instruction-title');
+        const qrImg = document.getElementById('qr-code-img');
+        const qrWrapper = document.getElementById('qr-code-wrapper');
+        const step1 = document.getElementById('instruction-text-step1');
+        const content = document.getElementById('transfer-content');
+
+        let cartTotal = 0;
+        let cartId = "GG" + Math.floor(Math.random() * 900000 + 100000);
+        
+        if (window.Snipcart) {
+            const state = Snipcart.store.getState();
+            cartTotal = state.cart.total || 0;
+            // Lấy mã phiên giỏ hàng làm nội dung chuyển khoản để đối soát dòng tiền
+            cartId = state.cart.token ? state.cart.token.substring(0, 8).toUpperCase() : cartId;
+        }
+
+        // Định dạng nội dung chuyển khoản mẫu
+        content.textContent = `GREENGLOW ${cartId}`;
+
+        if (method === 'cod') {
+            box.style.display = 'none';
+        } else {
+            box.style.display = 'block';
+            
+            if (method === 'momo') {
+                title.textContent = "Hướng dẫn thanh toán qua MoMo";
+                step1.innerHTML = `Mở ứng dụng <strong>MoMo</strong>, chọn quét mã chuyển tiền để thanh toán số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
+                
+                // Liên kết API sinh mã VietQR MoMo tự động (Hãy đổi số điện thoại của bạn ở đây)
+                const yourPhone = "0912345678"; 
+                const yourName = "NGUYEN VAN A";
+                qrImg.src = `https://api.vietqr.io/image/970418-${yourPhone}-momo.jpg?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}&accountName=${encodeURIComponent(yourName)}`;
+                qrWrapper.style.display = 'inline-block';
+            } 
+            else if (method === 'zalopay') {
+                title.textContent = "Hướng dẫn thanh toán qua ZaloPay";
+                step1.innerHTML = `Quét mã bên bằng ứng dụng <strong>ZaloPay</strong> hoặc ngân hàng bất kỳ để chuyển khoản số tiền: <span style="color: #047857; font-weight: bold;">${cartTotal.toLocaleString('vi-VN')} ₫</span>`;
+                
+                // Liên kết API sinh mã VietQR ZaloPay qua Vietcombank (Hãy đổi số tài khoản của bạn ở đây)
+                const bankId = "VCB"; 
+                const accountNumber = "10123456789"; 
+                qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNumber}-qr_only.png?amount=${cartTotal}&addInfo=GREENGLOW%20${cartId}`;
+                qrWrapper.style.display = 'inline-block';
+            }
+        }
+    }
+
+    // Tự động kích hoạt khi giỏ hàng Snipcart được mở ra
+    document.addEventListener('snipcart.ready', () => {
+        Snipcart.events.on('cart.opened', () => {
+            setTimeout(() => {
+                // Đặt COD làm mặc định ban đầu khi mở giỏ hàng
+                const checkedMethod = document.querySelector('input[name="payment-method"]:checked');
+                if (checkedMethod) {
+                    showPaymentInstruction(checkedMethod.value);
+                }
+            }, 600);
+        });
+    });
+</script>
     <!-- Script bổ trợ cho Netlify Identity mượt mà hơn khi redirect đăng nhập -->
     <script>
         if (window.netlifyIdentity) {
