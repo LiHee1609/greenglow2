@@ -592,6 +592,44 @@
     }, 500);
   }
 </script>
+
+
+<script>
+  document.addEventListener('snipcart.ready', () => {
+    // Sự kiện khi đơn hàng hoàn tất
+    Snipcart.events.on('order.completed', (order) => {
+      // Tìm vị trí màn hình xác nhận
+      const confirmBox = document.querySelector('.snipcart-order-confirmation');
+      if (confirmBox) {
+        // Tạo HTML cho 2 nút MoMo & ZaloPay
+        const paymentHTML = `
+          <div style="margin: 20px 0; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+            <h3 style="margin: 0 0 10px 0; font-size: 16px;">Chọn phương thức quét mã:</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+              <button onclick="showQR('momo', ${order.grandTotal}, '${order.invoiceNumber}')" style="flex: 1; padding: 10px; border-radius: 5px; background: #a21caf; color: white; border: none; cursor: pointer;">MoMo</button>
+              <button onclick="showQR('zalo', ${order.grandTotal}, '${order.invoiceNumber}')" style="flex: 1; padding: 10px; border-radius: 5px; background: #0284c7; color: white; border: none; cursor: pointer;">ZaloPay</button>
+            </div>
+            <div id="qr-result" style="text-align: center;"></div>
+          </div>
+        `;
+        confirmBox.insertAdjacentHTML('beforeend', paymentHTML);
+      }
+    });
+  });
+
+  function showQR(type, amount, invoice) {
+    const resultDiv = document.getElementById('qr-result');
+    const qrLink = type === 'momo' 
+      ? `https://img.vietqr.io/image/970418-0912345678-compact.png?amount=${amount}&addInfo=GREENGLOW%20${invoice}`
+      : `https://img.vietqr.io/image/970403-10123456789-compact.png?amount=${amount}&addInfo=GREENGLOW%20${invoice}`;
+      
+    resultDiv.innerHTML = `
+      <img src="${qrLink}" style="width: 150px; height: 150px;">
+      <p style="font-size: 13px;">Số tiền: <strong>${amount.toLocaleString()} đ</strong></p>
+      <p style="font-size: 13px;">Nội dung: <strong>GREENGLOW ${invoice}</strong></p>
+    `;
+  }
+</script>
     
     <script src="./gui-mail.js" defer></script>
 </body>
